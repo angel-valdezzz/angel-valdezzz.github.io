@@ -11,8 +11,14 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Portfolio decisions
 - Person-first selected design: generated_images/exec-6ae8dff6-9ee9-4bd4-8438-318634415dcf.png.
 - Preserve original option 2 palette: green/teal, blue and violet. Do not replace with only purple/blue.
-- Centered serif introduction: Hola, soy Ángel. Keep La curiosidad es mi punto de partida.
+- Centered serif introduction: Hola, soy Angel. Keep La curiosidad es mi punto de partida.
 - Do not imply mathematics or robotics expertise. Pillars: Desarrollo, Automatización, Aprendizaje.
 - Actual employment: Senior Tester at EPAM Neoris, client AXA; SDET is a career direction.
 - Animated cosmos; stars, parallax, slow orbital movement, pause and reduced-motion support.
 - ES/EN, dark/light/system, responsive, real CV downloads, projects appear after personal introduction.
+
+## Motion revision approved October 6, 2026
+- Name is Angel, without accent, throughout site copy and metadata. Existing CV files remain unchanged.
+- English is default at root; Spanish remains /es/.
+- Replace superficial image translation with visibly flowing nebula shaders, independent orbiting planets and rotating Earth surface/clouds. Preserve teal/green-blue-violet palette, serif personal introduction and readable text.
+- Gravitational cursor lens, magnetic buttons, scroll reveals and project depth. All motion must honor pause and reduced motion; mobile uses autonomous motion and touch response.

@@ -26,3 +26,9 @@ The local interactive demos are explicitly illustrative and use fictional data; 
 A push to main builds and deploys `dist/client` to GitHub Pages through `.github/workflows/pages.yml`. Pages source must be **GitHub Actions**. The build produces static `/es/` and `/en/` routes, social metadata, a sitemap and robots.txt.
 
 Motion can be paused and respects reduced-motion preferences. Theme selection is stored locally in the browser.
+
+## Live universe
+
+Nebula domain warping in WebGL; Canvas 2D rendering when WebGL is unavailable. Independent planetary orbits, a rotating Earth surface and cloud layer, cursor gravity, magnetic buttons, scroll reveals and project tilt. Motion pauses globally and respects reduced motion. Rendering stops while the scene is off screen or the tab is hidden. Root and `/en/` are English; `/es/` is Spanish.
+
+Earth imagery: NASA Blue Marble / Reto Stöckli, NASA Goddard Space Flight Center; source catalog https://visibleearth.nasa.gov/view.php?id=57752. Texture distributed by WebGL Earth: https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg. Nebula artwork generated for this portfolio.
