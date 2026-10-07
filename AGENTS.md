@@ -43,3 +43,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Subtle gold button gradients, 2px hover lift and a thin rotating light on button borders. Honor reduced motion and provide a pause control.
 - No planets, nebulas, cursor lens, large canvas art, competency column or generic service landing page presentation.
 - GitHub Pages remains the hosting. Publish via the existing main-branch workflow after build, tests and browser QA pass.
+
+## Approved audit improvements — October 7, 2026
+- Preserve the current sober navy/charcoal/gold design; make motion more perceptible without decorative continuous effects.
+- Show authentic project output previews and direct real-example links. Keep conceptual demos secondary and clearly labeled.
+- One-time scroll entrances (roughly 520 ms / 18 px), gold divider draws, brighter one-pass button border light, restrained preview hover lift.
+- Active-section navigation, compact mobile introduction, coherent mobile demo tabs with complete arrow/Home/End keyboard support.
+- Contact headline positions quality engineering rather than freelance services. Accessible motion control also lives in the header; pause and system reduced motion must keep all content visible.
