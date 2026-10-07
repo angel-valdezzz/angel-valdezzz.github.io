@@ -29,3 +29,6 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Large sans-serif left-aligned personal greeting, animated abstract fine lines to the right. No planets, Earth, space photos or nebula.
 - User explicitly requires real continuous runtime animation and pointer response; a static generated raster is insufficient. Canvas trajectories are the intended runtime artwork.
 - Mobile keeps copy above animation, with no overlap, accessible pause and reduced-motion support.
+
+## Professional positioning
+- Introduce QA Engineer, test automation, and Python tooling in both hero languages. SDET is the next career step, not the current employment title. Keep the personal headline and current visual design.
