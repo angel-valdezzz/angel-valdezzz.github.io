@@ -32,3 +32,14 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 ## Professional positioning
 - Introduce QA Engineer, test automation, and Python tooling in both hero languages. SDET is the next career step, not the current employment title. Keep the personal headline and current visual design.
+
+## Approved professional portfolio — October 7, 2026
+- This decision supersedes every earlier visual, palette and animation direction above.
+- Source of truth: the approved interactive preview at /workspace/portfolio-scroll.html, based on the third sober visual option.
+- Dark navy/charcoal with warm sand/gold accents. Header A.M.; Angel Molina appears once as the main heading, without an accent.
+- Hero subtitle: QA Automation Engineer · SDET. Retain actual employment titles Tester Sr / Senior Tester and Tester Jr / Junior Tester.
+- Three featured projects precede compact experience and contact. Preserve English at root, Spanish at /es/, real CV downloads, project demos, technical case details and repository/documentation links.
+- Native page scrolling changes the background from navy to charcoal to a subtle warm dark tone. No internal scrolling frame in the published site.
+- Subtle gold button gradients, 2px hover lift and a thin rotating light on button borders. Honor reduced motion and provide a pause control.
+- No planets, nebulas, cursor lens, large canvas art, competency column or generic service landing page presentation.
+- GitHub Pages remains the hosting. Publish via the existing main-branch workflow after build, tests and browser QA pass.

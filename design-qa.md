@@ -1,27 +1,48 @@
-# Flow Studio redesign — design QA
+# Approved professional portfolio: design QA
 
-Source visual truth: ../generated_images/exec-2b08855a-d9b4-49bd-9bca-644a3dd894a8.png (1487 × 1058).
-Implementation: ../redesign-desktop-verified.jpg (1348 × 926), browser viewport 1363 × 936, usable width 1348. Source scaled proportionally to implementation width, cropped to the same height; no stretching. Density normalized to screenshot pixels. State: English, dark, header and hero at scroll top, animation active.
-Full comparison: ../redesign-comparison-final.jpg. Focused greeting, role, body and CTA comparison: ../redesign-type-comparison.jpg. Mobile: ../redesign-mobile-final.jpg (390 × 844 iframe crop, usable content 375px).
+Source visual truth: `/workspace/portfolio-scroll.html`, the interactive preview approved by Angel on October 7, 2026. Earlier cosmic and Flow Studio designs are superseded.
 
-## Findings and comparison history
-- P2, initial line field: colors too dim and mixed together. Replaced per-trajectory hue with a spatial teal/blue/violet gradient, increased line luminosity. Post-fix capture clearly separates all three colors.
-- P2, initial mobile artwork touched the CTA region. Moved canvas below all copy and controls, added a clear gap and capped trajectory count. English and Spanish mobile views remain readable. Width and scroll width both 375px.
-- P2, initial about heading wrapped differently and hero spacing drifted. Adjusted headline line-height, role size, section height and about type. Final combined and focused comparison retain left-aligned greeting, personal copy, right-hand artwork and two-column about hierarchy.
+Evidence:
+- Source browser capture: `/workspace/scratch/e9e2aec29a44/portfolio-reference-qa.jpg` (1363 × 936).
+- Desktop implementation: `/workspace/scratch/e9e2aec29a44/portfolio-desktop-qa.jpg` (1348 × 926).
+- Combined comparison: `/workspace/scratch/e9e2aec29a44/portfolio-comparison-qa.jpg`.
+- Mobile implementation: `/workspace/scratch/e9e2aec29a44/portfolio-mobile-qa.jpg`, a 360px iframe with 345px content width after its scrollbar.
+- Local implementation: `http://terminal.local:4173/es/`.
+- State: Spanish, dark, initial hero. Screenshots are CSS-pixel density 1. The combined comparison removes conversation toolbar chrome and compares the top 620px product regions at equivalent widths.
 
-## Required fidelity surfaces
-- Fonts: self-hosted Inter, bold large sans-serif greeting, regular role/body/UI. Name without accent. Display hierarchy and narrow-screen wrapping inspected.
-- Spacing: approximately 6% margins, split hero, editorial section dividers, generous breathing room. Mobile intentionally stacks the artwork below copy. Pause and scroll affordances are functional additions.
-- Colors: near-black #06090c, white title, muted high-contrast copy, teal/green, blue and violet accents. Dark-only is the user's explicit revision; CV replaces the mock's theme toggle.
-- Image/runtime fidelity: the user explicitly requires real moving lines, not a static raster. Canvas draws 3D Lorenz trajectories, with autonomous rotation and pointer response. Its evolving butterfly silhouette differs from the generated still's folds intentionally; palette, fine strands and placement preserve the selected direction. No planets, nebula images or Earth remain in the rendered page. This is the runtime animation itself, not a substitute static decorative asset.
-- Copy: greeting, role and hero intro match the selected target. About uses existing accurate biography; projects, experience and CV remain available. No invented mathematics or robotics expertise.
+## Findings
 
-## Interaction evidence
-Browser verified English default, Spanish switch and reverse switch, desktop project CTA, mobile menu toggle, API simulation/validations, annotation highlight, dialog close and navigation back to top. Animation frame advanced 104 → 105 before pause; stayed 105 at a later observation; resumed to 165. Pointer movement during UI interaction changes viewing angle. Console contains Chrome-extension metadata errors only; no application errors observed. Desktop usable/scroll width 1348/1348, mobile 375/375.
+No actionable P0/P1/P2 design differences remain.
 
-## Validation and limits
-Production build passed and all four existing packaging/worker tests passed. CV assets and routes retained. Reduced-motion media listener and static first-frame behavior reviewed in code; OS preference was not emulated in this browser. Mobile verified in a 390 × 844 viewport iframe rather than on physical hardware. Per-device frame rates are not benchmarked.
+- **Fonts/typography:** self-hosted Inter, sans-serif heading, sober weights and the approved role line. Main body type is 16px rather than the compact preview's 14–15px, intentionally improving reading on the published site. Supporting labels are at least 12px.
+- **Spacing/layout:** A.M. header, one name heading, two-column desktop introduction, three numbered project rows, compact experience and contact. The full page has a 1120px maximum content width and native scrolling, replacing the conversation's 620px scroll frame. Additional ES/EN controls and existing demos/case details are intentional preserved capabilities.
+- **Colors/tokens:** approved navy `rgb(20,33,46)`, charcoal `rgb(22,25,32)` and warm dark endpoint `rgb(36,29,29)`. Gold is `#d8bd93`. Scroll verification observed charcoal at projects and `rgb(35,29,29)` near contact; pausing restores navy.
+- **Image/asset fidelity:** the approved preview has no representational imagery. No canvas artwork, planets or generated background images are rendered. Phosphor icons match the source's thin directional and download icon treatment. Gold gradients are explicitly approved button styling.
+- **Copy/content:** Angel Molina without accent; QA Automation Engineer · SDET in the hero; Tester Sr / Senior Tester retained in employment. Projects appear before experience. Root stays English, `/es/` Spanish. CV assets remain real existing PDFs.
 
-No actionable P0/P1/P2 findings remain. P3: live line silhouette varies with time and pointer angle; smaller secondary-link typography may be refined after user review.
+## Browser interaction verification
+
+- Navigation to projects/contact and back to top.
+- ES/EN switch updates visible copy, document language, URL and CV target.
+- Evidence demo dialog opens; API tab produces fictional 200/JSON validation output; annotation tab highlights the email field and changes its action to remove annotation; close restores the page.
+- Mobile project case study expands with problem, solution and technical decisions. No horizontal overflow at desktop or mobile width.
+- Keyboard focus activates the CV border animation while the button remains stable; pause turns motion off and background returns to navy.
+- Console checked: no site warnings/errors. Browser extension metadata errors were excluded by their `chrome-extension:` source.
+- Build and four existing worker/packaging tests pass.
+
+## Comparison history
+
+First full-view comparison found no actionable P0/P1/P2 mismatch. Focused visual inspection covered readable hero copy, button treatment and the mobile project row. Before final checks, language touch targets were enlarged for coarse pointers, navigation was allowed to wrap for enlarged text, and the demo dialog received an accessible name. These are accessibility refinements, not changes to the approved visual direction.
+
+## Implementation checklist
+
+- Preserve existing GitHub Pages workflow and CVs.
+- Remove temporary QA wrappers before the production build.
+- Publish only after the final build and tests pass.
+- Verify the deployed GitHub Pages route in the browser.
+
+## Follow-up polish
+
+None required. Actual Android hardware and OS-level reduced-motion emulation were not available; CSS and runtime guards both honor that preference.
 
 final result: passed
