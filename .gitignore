@@ -1,0 +1,6 @@
+node_modules/
+dist/
+qa-mobile.html
+*.log
+.env*
+qa/
