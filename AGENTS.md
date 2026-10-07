@@ -50,3 +50,6 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - One-time scroll entrances (roughly 520 ms / 18 px), gold divider draws, brighter one-pass button border light, restrained preview hover lift.
 - Active-section navigation, compact mobile introduction, coherent mobile demo tabs with complete arrow/Home/End keyboard support.
 - Contact headline positions quality engineering rather than freelance services. Accessible motion control also lives in the header; pause and system reduced motion must keep all content visible.
+
+## Experience color adjustment — October 7, 2026
+- Job titles (Tester Sr / Tester Jr and English equivalents) use the existing sand/gold accent. Keep the main Experience heading white and company, dates, and description in their current neutral colors. No gradients or animation on job titles.
