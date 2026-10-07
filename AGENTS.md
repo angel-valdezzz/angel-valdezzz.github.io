@@ -53,3 +53,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 
 ## Experience color adjustment — October 7, 2026
 - Job titles (Tester Sr / Tester Jr and English equivalents) use the existing sand/gold accent. Keep the main Experience heading white and company, dates, and description in their current neutral colors. No gradients or animation on job titles.
+
+## Approved interaction refinements — October 7, 2026
+- Hero focus: maintainable automation, test architecture, reusable tools (ES and EN). Replace "Evidencia clara" / "Clear evidence" so reporting does not dominate the positioning.
+- Warm gold hover and keyboard-focus feedback on buttons, links, previews, and disclosures. Preserve layout, palette, authentic outputs, and gold experience titles.
+- Button border light loops slowly only while hovered or keyboard-focused, and fades when interaction ends; the button itself does not rotate. Gold primary-button gradients gently move during interaction.
+- Scroll entrance effects remain one-time. Every motion still honors pause and system reduced motion.
