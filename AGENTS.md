@@ -22,3 +22,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - English is default at root; Spanish remains /es/.
 - Replace superficial image translation with visibly flowing nebula shaders, independent orbiting planets and rotating Earth surface/clouds. Preserve teal/green-blue-violet palette, serif personal introduction and readable text.
 - Gravitational cursor lens, magnetic buttons, scroll reveals and project depth. All motion must honor pause and reduced motion; mobile uses autonomous motion and touch response.
+
+## Current redesign (supersedes earlier visual and motion decisions)
+- Selected Flow Studio, first displayed reference: /workspace/scratch/e971ddb20d52/generated_images/exec-2b08855a-d9b4-49bd-9bca-644a3dd894a8.png.
+- Dark only. Remove theme selector. Preserve teal/green, blue and violet.
+- Large sans-serif left-aligned personal greeting, animated abstract fine lines to the right. No planets, Earth, space photos or nebula.
+- User explicitly requires real continuous runtime animation and pointer response; a static generated raster is insufficient. Canvas trajectories are the intended runtime artwork.
+- Mobile keeps copy above animation, with no overlap, accessible pause and reduced-motion support.

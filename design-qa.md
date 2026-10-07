@@ -1,20 +1,27 @@
-# Live universe revision — design QA
+# Flow Studio redesign — design QA
 
-Source visual: ../generated_images/exec-6ae8dff6-9ee9-4bd4-8438-318634415dcf.png (1487×1058). User-approved revision: independently moving nebula, planets and Earth, gravity lens, magnetic buttons, scroll reveals and project depth; English default; Angel without accent.
+Source visual truth: ../generated_images/exec-2b08855a-d9b4-49bd-9bca-644a3dd894a8.png (1487 × 1058).
+Implementation: ../redesign-desktop-verified.jpg (1348 × 926), browser viewport 1363 × 936, usable width 1348. Source scaled proportionally to implementation width, cropped to the same height; no stretching. Density normalized to screenshot pixels. State: English, dark, header and hero at scroll top, animation active.
+Full comparison: ../redesign-comparison-final.jpg. Focused greeting, role, body and CTA comparison: ../redesign-type-comparison.jpg. Mobile: ../redesign-mobile-final.jpg (390 × 844 iframe crop, usable content 375px).
 
-Browser implementation: ../motion-desktop.jpg (1348×926 screenshot; browser viewport 1363×936 including scrollbar), ../motion-mobile.jpg (390×844 iframe region; usable content 375px). Combined comparison: ../motion-comparison.jpg, both fit to 800px width without stretching. Dark comparison differs in language and moving object positions intentionally. Light and mobile states inspected in browser. Focused hero/mobile screenshots show readable controls and copy; no additional crop needed for those surfaces.
+## Findings and comparison history
+- P2, initial line field: colors too dim and mixed together. Replaced per-trajectory hue with a spatial teal/blue/violet gradient, increased line luminosity. Post-fix capture clearly separates all three colors.
+- P2, initial mobile artwork touched the CTA region. Moved canvas below all copy and controls, added a clear gap and capped trajectory count. English and Spanish mobile views remain readable. Width and scroll width both 375px.
+- P2, initial about heading wrapped differently and hero spacing drifted. Adjusted headline line-height, role size, section height and about type. Final combined and focused comparison retain left-aligned greeting, personal copy, right-hand artwork and two-column about hierarchy.
 
-Fidelity surfaces: Cormorant Garamond display type and Inter UI retained; personal hierarchy, centered hero, three-column about and project grid retained; teal/green, blue and violet palette retained. Nebula artwork derives from the selected source, with planets/Earth removed to enable independent animation. NASA Earth texture has different geography and lighting from original artwork intentionally. Copy preserves biography, project content and role; name corrected to Angel and root metadata is English.
+## Required fidelity surfaces
+- Fonts: self-hosted Inter, bold large sans-serif greeting, regular role/body/UI. Name without accent. Display hierarchy and narrow-screen wrapping inspected.
+- Spacing: approximately 6% margins, split hero, editorial section dividers, generous breathing room. Mobile intentionally stacks the artwork below copy. Pause and scroll affordances are functional additions.
+- Colors: near-black #06090c, white title, muted high-contrast copy, teal/green, blue and violet accents. Dark-only is the user's explicit revision; CV replaces the mock's theme toggle.
+- Image/runtime fidelity: the user explicitly requires real moving lines, not a static raster. Canvas draws 3D Lorenz trajectories, with autonomous rotation and pointer response. Its evolving butterfly silhouette differs from the generated still's folds intentionally; palette, fine strands and placement preserve the selected direction. No planets, nebula images or Earth remain in the rendered page. This is the runtime animation itself, not a substitute static decorative asset.
+- Copy: greeting, role and hero intro match the selected target. About uses existing accurate biography; projects, experience and CV remain available. No invented mathematics or robotics expertise.
 
-Comparison history:
-- P2: first software cloud sampling produced horizontal bands and hard panel edges. Fixed with a background-only cloud asset and continuously overlapping opaque ribbons; light tint applied uniformly after composition. Revised dark/light captures show no bands or panel edges.
-- P2: coarse Earth and low-contrast light-theme about. Increased sphere projection detail, separate surface/cloud rotation, reduced Earth opacity in light mode and darkened pillar text. Revised captures show readable about text.
-- P2: mobile planets and horizon too close to intro/CTA. Moved large planet above greeting, omitted third planet on narrow software scene, lowered mobile Earth horizon; revised mobile screenshot shows clear copy and buttons with no overflow.
+## Interaction evidence
+Browser verified English default, Spanish switch and reverse switch, desktop project CTA, mobile menu toggle, API simulation/validations, annotation highlight, dialog close and navigation back to top. Animation frame advanced 104 → 105 before pause; stayed 105 at a later observation; resumed to 165. Pointer movement during UI interaction changes viewing angle. Console contains Chrome-extension metadata errors only; no application errors observed. Desktop usable/scroll width 1348/1348, mobile 375/375.
 
-Interaction evidence: universe elapsed advanced from 0.20 to 5.63; paused value stayed 0.85 across observations. Gravity lens seen on left nebula with surrounding cloud displacement. Desktop CTA reaches projects; four project panels revealed at viewport positions 350/756px. Menu, language switching, dark/light/system and mobile width checked. Mobile body width and scroll width both 375px. Root and /en/ metadata English, /es/ Spanish; no accented name in HTML or source copy.
+## Validation and limits
+Production build passed and all four existing packaging/worker tests passed. CV assets and routes retained. Reduced-motion media listener and static first-frame behavior reviewed in code; OS preference was not emulated in this browser. Mobile verified in a 390 × 844 viewport iframe rather than on physical hardware. Per-device frame rates are not benchmarked.
 
-Rendering: WebGL shader plus animated Canvas renderer when WebGL is unavailable. This cloud browser uses Canvas; hardware WebGL visuals could not be inspected here. Reduced-motion handled by live media query checks and CSS; OS setting itself was not changed. Canvas stops off-screen/hidden, runs at bounded cadence, cleans listeners and animation frame on unmount. Console contains extension metadata errors only, no application errors.
-
-Validation: production build and four packaging/worker tests pass. Existing CV downloads and project demos retained. No actionable P0/P1/P2 findings remain. P3: planetary surface detail varies between WebGL and software rendering; hardware/per-device frame rates are not benchmarked.
+No actionable P0/P1/P2 findings remain. P3: live line silhouette varies with time and pointer angle; smaller secondary-link typography may be refined after user review.
 
 final result: passed

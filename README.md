@@ -1,6 +1,6 @@
-# Ángel Molina — Personal portfolio
+# Angel Molina — Personal portfolio
 
-Person-first portfolio with an animated cosmic scene, Spanish/English content, dark/light/system themes, responsive navigation, real CV downloads, experience and selected engineering projects.
+Person-first portfolio with a continuously evolving abstract line field, dark styling, English/Spanish content, responsive navigation, real CV downloads, experience and selected engineering projects.
 
 **Website:** https://angel-valdezzz.github.io/
 
@@ -13,22 +13,18 @@ npm run build
 npm run test:sites
 ```
 
-Node.js 22. React and Vite. Phosphor icons. Self-hosted Cormorant Garamond and Inter fonts. Generated cosmic artwork. No backend or analytics.
+Node.js 22. React and Vite. Phosphor icons and self-hosted Inter fonts. No backend or analytics.
 
 ## Content
 
-Personal content and project descriptions live in `src/App.jsx`; styles in `src/styles.css`. Assets and both CV languages are under `public/`. Public source references: [profile README](https://github.com/angel-valdezzz/angel-valdezzz) and individual project READMEs. Experience dates use the author's existing CV. SDET is a career direction, not a claimed current title.
+Copy and projects: `src/App.jsx`. Layout: `src/styles.css`. Animation: `src/FlowField.jsx`. CV files: `public/cv/`. SDET is a career direction, not a claimed current title.
 
-The local interactive demos are explicitly illustrative and use fictional data; links open actual project reports and documentation. They do not execute Robot Framework, Selenium, or HTTP requests.
+The local demos use fictional data. Links open real project reports and documentation. Demos do not execute Robot Framework, Selenium or HTTP requests.
+
+## Motion
+
+Canvas renders three-dimensional Lorenz trajectories as fine teal, blue and violet strands. Autonomous rotation and evolving traces continue without mouse movement; pointer input changes the viewing angle smoothly. Mobile stacks the field below the introduction. The pause control preserves the scene and reduced-motion preferences disable continuous motion. Rendering suspends off screen and when the tab is hidden. Animation density is capped for smaller screens.
 
 ## Deployment
 
-A push to main builds and deploys `dist/client` to GitHub Pages through `.github/workflows/pages.yml`. Pages source must be **GitHub Actions**. The build produces static `/es/` and `/en/` routes, social metadata, a sitemap and robots.txt.
-
-Motion can be paused and respects reduced-motion preferences. Theme selection is stored locally in the browser.
-
-## Live universe
-
-Nebula domain warping in WebGL; Canvas 2D rendering when WebGL is unavailable. Independent planetary orbits, a rotating Earth surface and cloud layer, cursor gravity, magnetic buttons, scroll reveals and project tilt. Motion pauses globally and respects reduced motion. Rendering stops while the scene is off screen or the tab is hidden. Root and `/en/` are English; `/es/` is Spanish.
-
-Earth imagery: NASA Blue Marble / Reto Stöckli, NASA Goddard Space Flight Center; source catalog https://visibleearth.nasa.gov/view.php?id=57752. Texture distributed by WebGL Earth: https://github.com/turban/webgl-earth/blob/master/images/2_no_clouds_4k.jpg. Nebula artwork generated for this portfolio.
+A push to `main` builds and deploys `dist/client` to GitHub Pages using `.github/workflows/pages.yml`. Root and `/en/` are English; `/es/` is Spanish. The build includes metadata, robots.txt and a sitemap. There is one carefully tuned dark theme.
