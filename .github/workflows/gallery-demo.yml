@@ -1,0 +1,34 @@
+name: Gallery demo checks
+on:
+  push:
+    branches: [codex/portfolio-gallery-demo]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+concurrency:
+  group: gallery-demo-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Resolve demo dependencies
+        run: |
+          cp package-lock.json /tmp/gallery-prior-lock.json
+          npm install --ignore-scripts
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const before=JSON.parse(fs.readFileSync('/tmp/gallery-prior-lock.json','utf8'));
+          const after=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
+          const changes=Object.fromEntries(Object.entries(after.packages).filter(([k,v])=>JSON.stringify(before.packages[k])!==JSON.stringify(v)));
+          console.log('GALLERY_LOCK_DELTA:'+JSON.stringify({changes,removed:Object.keys(before.packages).filter(k=>!(k in after.packages))}));
+          NODE
+      - run: npm run build
+      - run: npm run test:sites
