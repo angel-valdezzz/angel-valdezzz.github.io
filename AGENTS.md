@@ -59,3 +59,15 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Warm gold hover and keyboard-focus feedback on buttons, links, previews, and disclosures. Preserve layout, palette, authentic outputs, and gold experience titles.
 - Button border light loops slowly only while hovered or keyboard-focused, and fades when interaction ends; the button itself does not rotate. Gold primary-button gradients gently move during interaction.
 - Scroll entrance effects remain one-time. Every motion still honors pause and system reduced motion.
+
+## Approved gallery demo — October 15, 2026
+- Supersedes prior visual directions for this demo branch. The main production site is not being published yet.
+- Selected visual: the first displayed three-column, nine-project gallery, refined with charcoal #101218, warm white #F2F0EB and violet #B59AFF.
+- All seven tools and both Robot Framework web/API practice projects have equal prominence. No featured Evidence Reporter, hidden secondary collection, sales language, location or CV-like timeline.
+- Preserve the brief greeting "Hi, I'm Angel." / "Hola, soy Angel.", personal tone and compact About/contact footer.
+- Header includes direct GitHub icon/link, real language-specific CV download, EN/ES and motion control.
+- React + Vite + Motion for React. Purposeful entrances, hover response and accessible project details. Pause and system reduced motion must leave content available.
+- Use actual existing output screenshots and source excerpts from the repositories. Never present generated code or simulated outcomes as real test executions.
+- Senior Tester / Tester Sr is the actual role. SDET is the next career step.
+- README work follows selection and integration of the portfolio.
+- Local shell is currently blocked by helper_sandbox_lock_failed. Use GitHub Actions checks on this isolated branch, with screenshots and a self-contained demo artifact; do not claim manual visual QA or live preview until actually available.

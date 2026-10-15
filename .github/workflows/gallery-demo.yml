@@ -19,16 +19,40 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - name: Resolve demo dependencies
-        run: |
-          cp package-lock.json /tmp/gallery-prior-lock.json
-          npm install --ignore-scripts
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          const before=JSON.parse(fs.readFileSync('/tmp/gallery-prior-lock.json','utf8'));
-          const after=JSON.parse(fs.readFileSync('package-lock.json','utf8'));
-          const changes=Object.fromEntries(Object.entries(after.packages).filter(([k,v])=>JSON.stringify(before.packages[k])!==JSON.stringify(v)));
-          console.log('GALLERY_LOCK_DELTA:'+JSON.stringify({changes,removed:Object.keys(before.packages).filter(k=>!(k in after.packages))}));
-          NODE
+      - run: npm ci
       - run: npm run build
       - run: npm run test:sites
+      - run: node scripts/package-gallery-demo.mjs
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:gallery
+      - name: Expose review captures
+        if: always()
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          function walk(dir){return fs.existsSync(dir)?fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]):[];}
+          for(const file of walk('test-results').filter(f=>f.endsWith('gallery-preview.jpg'))){
+            const name=file.includes('mobile')?'mobile':'desktop';
+            const data=fs.readFileSync(file).toString('base64');
+            for(let i=0;i<data.length;i+=16000) console.log('GALLERY_IMAGE '+name+' '+(i/16000)+' '+data.slice(i,i+16000));
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gallery-browser-review
+          path: |
+            test-results
+            gallery-test-report
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: angel-gallery-demo
+          path: dist/client/angel-gallery-demo.html
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gallery-static-build
+          path: dist/client
+          retention-days: 14
