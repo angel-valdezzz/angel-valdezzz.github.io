@@ -1,4 +1,5 @@
 import React, {useEffect, useRef} from 'react';
+import {StarField} from './StarField.jsx';
 import {motion, useScroll, useSpring, useTransform} from 'motion/react';
 
 export function AmbientBackground({moving}) {
@@ -11,6 +12,7 @@ export function AmbientBackground({moving}) {
       <div className="ambient-wash ambient-teal"/>
       <motion.div className="ambient-wash ambient-blue" style={{opacity: moving ? blue : .3}}/>
     </motion.div>
+    <StarField moving={moving}/>
     <div className="ambient-veil"/>
   </div>;
 }

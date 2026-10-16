@@ -21,3 +21,7 @@ See `design-qa.md`. Automated browser tests do not replace visual comparison wit
 
 ## Motion revision
 Continuous background and geometric canvas animation work on desktop and mobile. The header pause button stops them; the operating system's reduced-motion preference takes priority. Cards respond to mouse movement, and details expand from the selected card. These are visual interactions; source snippets remain unexecuted examples.
+
+
+## Programmed stars
+A transparent Canvas layer draws individual stars over the gradient. Each point has its own size, depth, velocity and slow brightness variation. The positions are reproducible and the sky is not an image. Desktop pointer/scroll adds depth; mobile drifts automatically. Existing motion controls also stop the star field, and hidden tabs stop rendering. English remains the initial language at /demo/.

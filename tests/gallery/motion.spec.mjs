@@ -6,9 +6,11 @@ test('continuous motion is visible on desktop and mobile, and really stops on pa
   await page.evaluate(() => document.fonts.ready);
   const canvas = page.locator('.hero-canvas');
   await expect(canvas).toBeVisible();
+  await expect(page.locator('.star-field')).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('data-motion', 'on');
   const snapshot = () => page.evaluate(() => ({
     cube: document.querySelector('.hero-canvas').toDataURL(),
+    stars: document.querySelector('.star-field').toDataURL(),
     wash: getComputedStyle(document.querySelector('.ambient-violet')).transform,
     name: getComputedStyle(document.querySelector('.name-gradient')).backgroundPosition
   }));
@@ -17,6 +19,7 @@ test('continuous motion is visible on desktop and mobile, and really stops on pa
   await page.waitForTimeout(1200);
   const later = await snapshot();
   expect(later.cube).not.toBe(first.cube);
+  expect(later.stars).not.toBe(first.stars);
   expect(later.wash).not.toBe(first.wash);
   expect(later.name).not.toBe(first.name);
   await page.screenshot({path: testInfo.outputPath('motion-later.jpg'), type: 'jpeg', quality: 80});
@@ -30,7 +33,9 @@ test('continuous motion is visible on desktop and mobile, and really stops on pa
 
   await page.getByRole('button', {name: 'Enable motion', exact: true}).click();
   await page.waitForTimeout(350);
-  expect((await snapshot()).cube).not.toBe(paused.cube);
+  const resumed = await snapshot();
+  expect(resumed.cube).not.toBe(paused.cube);
+  expect(resumed.stars).not.toBe(paused.stars);
   await page.emulateMedia({reducedMotion: 'reduce'});
   await expect(page.getByRole('button', {name: 'Motion reduced by your device setting'})).toBeDisabled();
   await page.waitForTimeout(100);

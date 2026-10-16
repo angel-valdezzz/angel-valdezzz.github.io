@@ -83,3 +83,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Preserve the nine equal projects and existing content/layout. Interactive tool demos are a future improvement, not this pass.
 - Pause and system reduced motion stop continuous animation and pointer/scroll motion. Canvas rendering stops when hidden/offscreen. Verify actual pixels/time changes, not only the presence of animation code.
 - Deploy the updated candidate under /demo/ through the existing Pages workflow after checks pass.
+
+## Programmed star ceiling approved — October 16, 2026
+- User approved a Rolls-Royce-style star ceiling: small luminous points drawn with code, slow drift, gentle twinkle and depth. A translated image is not acceptable.
+- Add stars above the retained flowing gradient while preserving the cube, gradient greeting, card depth, entrances and detail transitions. Desktop adds light pointer/scroll parallax; mobile is autonomous.
+- English remains the default without a lang query. Use English when sharing the new demo link.
+- Use the same pause and system reduced-motion controls, keep text legible and suspend the star canvas in hidden tabs. No planets, tunnel or extra visual theme.
