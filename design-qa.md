@@ -32,3 +32,9 @@ The block is manual visual comparison / live preview, not user authorization. Th
 - Final desktop and mobile captures were inspected: nine equal project cards, compact introduction, genuine project output, visible header actions and a single-column mobile layout. No page overflow was detected, including at 320px.
 - Automated accessibility checks are not a complete accessibility certification. Strict visual matching remains blocked by unavailable source-image bytes; this candidate is ready for the user's design review, not a claim of completed source-image QA.
 - No production merge or deployment was performed. README work remains after portfolio review.
+
+
+## Motion revision — October 16, 2026
+The user found the first candidate too static and noted the missing gradient. This revision adds an animated violet/blue/teal background, an actual continuously rendered geometric canvas on desktop and mobile, gradient greeting, pointer depth and light on cards, staggered entrances and native-dialog opening/closing from the selected card's position. Motion is stopped by pause/system preference; the canvas also suspends outside the viewport or when the tab is hidden.
+
+New browser checks compare actual canvas pixels and computed gradient transforms/positions over time, then require them to stay unchanged while paused or with reduced motion. Interaction checks cover tilt, active dialog animation and restored focus. Timed viewport captures supplement the previous static/reduced-motion gallery captures. Results pending the new CI run; do not use the earlier passing run as evidence for these changes.

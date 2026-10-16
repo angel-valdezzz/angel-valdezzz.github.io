@@ -1,12 +1,13 @@
 import React, {useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore} from 'react';
 import {motion, MotionConfig, useMotionValue, useSpring} from 'motion/react';
-import {ArrowUpRight, ArrowUp, BracketsCurly, Browser, Code, Cube, DownloadSimple, EnvelopeSimple, FileText, GithubLogo, Pause, Play, Table, TerminalWindow, X} from '@phosphor-icons/react';
+import {ArrowUpRight, ArrowUp, BracketsCurly, Browser, Code, DownloadSimple, EnvelopeSimple, FileText, GithubLogo, Pause, Play, Table, TerminalWindow, X} from '@phosphor-icons/react';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
 import '@fontsource/inter/latin-700.css';
 import {projects} from './gallery/projects.js';
 import {copy} from './gallery/copy.js';
+import {AmbientBackground, HeroMotif} from './gallery/Scene.jsx';
 
 const github = 'https://github.com/angel-valdezzz';
 const email = 'angelgerardomolinavaldez@gmail.com';
@@ -55,42 +56,90 @@ function Preview({project: p, lang, c, full = false}) {
   }
   return <p className="preview-error">{c.failedImage}</p>;
 }
-function ProjectCard({project: p, lang, c, moving, onOpen}) {
-  return <motion.article className="project-card" aria-labelledby={'title-' + p.id} style={{'--project-color': p.color, '--project-surface': p.surface}}
-    initial={moving ? {opacity: 0, y: 18} : false}
+function ProjectCard({project: p, index, lang, c, moving, onOpen}) {
+  const pointerX = useMotionValue(0), pointerY = useMotionValue(0);
+  const rotateX = useSpring(pointerY, {stiffness: 200, damping: 24});
+  const rotateY = useSpring(pointerX, {stiffness: 200, damping: 24});
+  function reset() { pointerX.set(0); pointerY.set(0); }
+  useEffect(() => { if (!moving) reset(); }, [moving]);
+  function track(event) {
+    if (!moving || event.pointerType !== 'mouse') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width;
+    const y = (event.clientY - rect.top) / rect.height;
+    pointerX.set((x - .5) * 9);
+    pointerY.set((.5 - y) * 7);
+    event.currentTarget.style.setProperty('--pointer-x', (x * 100) + '%');
+    event.currentTarget.style.setProperty('--pointer-y', (y * 100) + '%');
+  }
+  return <motion.article className="project-card" aria-labelledby={'title-' + p.id}
+    style={{'--project-color': p.color, '--project-surface': p.surface}}
+    onPointerMove={track} onPointerLeave={reset}
+    initial={moving ? {opacity: 0, y: 30} : false}
     animate={!moving ? {opacity: 1, y: 0} : undefined}
-    whileInView={{opacity: 1, y: 0}} viewport={{once: true, amount: 0.12}}
-    transition={{duration: moving ? 0.4 : 0, ease: [0.22, 1, 0.36, 1]}}
-    whileHover={moving ? {y: -4} : {y: 0}}>
-    <div className="project-visual"><Preview project={p} lang={lang} c={c}/><span className="preview-kind">{p.image ? c.output : c.source}</span></div>
+    whileInView={{opacity: 1, y: 0}} viewport={{once: true, amount: .12}}
+    transition={{duration: moving ? .65 : 0, delay: moving ? (index % 3) * .08 : 0, ease: [.22, 1, .36, 1]}}
+    whileHover={moving ? {y: -6, transition: {duration: .25, delay: 0}} : {y: 0}}>
+    <motion.div className="project-visual" style={{rotateX: moving ? rotateX : 0, rotateY: moving ? rotateY : 0, transformPerspective: 900}}>
+      <Preview project={p} lang={lang} c={c}/><div className="project-glow" aria-hidden="true"/>
+      <span className="preview-kind">{p.image ? c.output : c.source}</span>
+    </motion.div>
     <div className="project-title-row"><h3 id={'title-' + p.id}>{p.name[lang]}</h3><span className={'project-kind ' + (p.kind === 'practice' ? 'practice-kind' : '')}>{c[p.kind]}</span></div>
     <p className="project-description" id={'description-' + p.id}>{p.description[lang]}</p>
-    <button className="explore" type="button" aria-label={c.explore + ' ' + p.name[lang]} aria-haspopup="dialog" aria-describedby={'description-' + p.id} onClick={event => onOpen(p, event.currentTarget)}>{c.explore}<ArrowUpRight size={18} aria-hidden="true"/></button>
+    <button className="explore" type="button" aria-label={c.explore + ' ' + p.name[lang]} aria-haspopup="dialog" aria-describedby={'description-' + p.id}
+      onClick={event => {reset(); onOpen(p, event.currentTarget);}}>{c.explore}<ArrowUpRight size={18} aria-hidden="true"/></button>
   </motion.article>;
 }
 function ProjectDialog({project: p, lang, c, moving, onClose, returnFocus}) {
-  const dialog = useRef(null);
+  const dialog = useRef(null), animation = useRef(null), closing = useRef(false);
+  function cardFrame(node) {
+    const source = returnFocus?.closest('.project-card')?.querySelector('.project-visual');
+    if (!source) return {transform: 'translateY(24px) scale(.94)', opacity: 0};
+    const from = source.getBoundingClientRect(), to = node.getBoundingClientRect();
+    return {
+      transform: 'translate(' + (from.left-to.left) + 'px,' + (from.top-to.top) + 'px) scale(' + (from.width/to.width) + ',' + (from.height/to.height) + ')',
+      opacity: 0, borderRadius: '5px'
+    };
+  }
   useLayoutEffect(() => {
     const node = dialog.current;
     const overflow = document.body.style.overflow;
     node.showModal();
     document.body.style.overflow = 'hidden';
+    if (moving && node.animate) {
+      animation.current = node.animate([cardFrame(node), {transform: 'none', opacity: 1, borderRadius: '12px'}],
+        {duration: 460, easing: 'cubic-bezier(.22,1,.36,1)'});
+    }
     return () => {
+      animation.current?.cancel();
       node.close();
       document.body.style.overflow = overflow;
       if (returnFocus?.isConnected) returnFocus.focus({preventScroll: true});
     };
   }, [returnFocus]);
+  useEffect(() => {if (!moving) animation.current?.finish();}, [moving]);
+  function requestClose() {
+    if (closing.current) return;
+    closing.current = true;
+    const node = dialog.current;
+    animation.current?.cancel();
+    if (!moving || !node.animate) {onClose(); return;}
+    node.dataset.closing = 'true';
+    animation.current = node.animate([{transform: 'none', opacity: 1, borderRadius: '12px'}, cardFrame(node)],
+      {duration: 280, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards'});
+    animation.current.finished.then(onClose).catch(() => {});
+  }
   function backdropClick(event) {
     if (event.target !== dialog.current) return;
     const rect = dialog.current.getBoundingClientRect();
-    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) onClose();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) requestClose();
   }
   return <dialog ref={dialog} className="project-dialog" aria-labelledby="detail-title" aria-describedby="detail-overview"
     style={{'--project-color': p.color, '--project-surface': p.surface}}
-    onCancel={event => {event.preventDefault(); onClose();}} onClick={backdropClick}>
-    <div className="dialog-toolbar"><span>{c.details}</span><button autoFocus type="button" className="icon-button" aria-label={c.close} onClick={onClose}><X size={22}/></button></div>
-    <motion.div className="dialog-content" initial={moving ? {opacity: 0, y: 12} : false} animate={{opacity: 1, y: 0}} transition={{duration: moving ? 0.22 : 0}}>
+    onCancel={event => {event.preventDefault(); requestClose();}} onClick={backdropClick}>
+    <div className="dialog-toolbar"><span>{c.details}</span><button autoFocus type="button" className="icon-button" aria-label={c.close} onClick={requestClose}><X size={22}/></button></div>
+    <motion.div className="dialog-content" initial={moving ? {opacity: 0, y: 16} : false} animate={{opacity: 1, y: 0}}
+      transition={{duration: moving ? .35 : 0, delay: moving ? .12 : 0}}>
       <span className="detail-kind">{c[p.kind]}</span>
       <h2 id="detail-title">{p.name[lang]}</h2>
       <p id="detail-overview" className="detail-overview">{p.overview[lang]}</p>
@@ -102,22 +151,6 @@ function ProjectDialog({project: p, lang, c, moving, onClose, returnFocus}) {
       </nav>
     </motion.div>
   </dialog>;
-}
-function HeroMotif({moving, c}) {
-  const x = useMotionValue(0), y = useMotionValue(0);
-  const rotateX = useSpring(y, {stiffness: 160, damping: 22});
-  const rotateY = useSpring(x, {stiffness: 160, damping: 22});
-  useEffect(() => { if (!moving) { x.set(0); y.set(0); } }, [moving, x, y]);
-  function track(event) {
-    if (!moving || event.pointerType !== 'mouse') return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    x.set(((event.clientX - rect.left) / rect.width - 0.5) * 18);
-    y.set(((event.clientY - rect.top) / rect.height - 0.5) * -18);
-  }
-  return <div className="hero-motif" aria-hidden="true" onPointerMove={track} onPointerLeave={() => {x.set(0); y.set(0);}}>
-    <motion.div className="hero-cube" style={moving ? {rotateX, rotateY} : {rotateX: 0, rotateY: 0}}><Cube size={120} weight="thin"/></motion.div>
-    <span>{c.work}</span>
-  </div>;
 }
 export function App() {
   const [lang, setLang] = useState(languageFromUrl);
@@ -163,7 +196,8 @@ export function App() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="motion-2">
+    <AmbientBackground moving={moving}/>
     <a href="#main" className="skip-link">{c.skip}</a>
     <header className="site-header"><div className="header-inner">
       <a className="brand" href="#top" aria-label={'Angel — ' + c.back}>Angel<span>.</span></a>
@@ -178,12 +212,19 @@ export function App() {
     <main id="main" className="container">
       <section className="hero" aria-labelledby="intro-title"><div className="hero-copy">
         <p className="eyebrow">{c.eyebrow}</p>
-        <motion.h1 id="intro-title" initial={false} animate={{opacity: 1}}>{c.greeting.slice(0,-1)}<span>.</span></motion.h1>
+        <motion.h1 id="intro-title" initial={moving ? {opacity: 0, y: 14} : false} animate={{opacity: 1, y: 0}} transition={{duration: moving ? .7 : 0, ease: [.22,1,.36,1]}}>
+          {c.greeting.slice(0,-1).replace('Angel','')}<span className="name-gradient">Angel</span><span>.</span></motion.h1>
         <p className="lead">{c.lead}</p>
       </div><HeroMotif moving={moving} c={c}/></section>
       <section id="projects" className="projects" aria-labelledby="projects-title">
-        <div className="section-heading"><h2 id="projects-title">{c.projectTitle}<span className="project-count" aria-label={lang === 'es' ? '9 proyectos' : '9 projects'}>09</span></h2><p>{c.projectLead}</p></div>
-        <div className="project-grid">{projects.map(p => <ProjectCard key={p.id} project={p} lang={lang} c={c} moving={moving} onOpen={(project, element) => {trigger.current = element; setSelected(project);}}/>)}</div>
+        <motion.div className="section-heading" initial={moving ? {opacity: 0, y: 18} : false}
+          animate={!moving ? {opacity: 1, y: 0} : undefined} whileInView={{opacity: 1, y: 0}} viewport={{once: true}}
+          transition={{duration: moving ? .6 : 0}}>
+          <h2 id="projects-title">{c.projectTitle}<span className="project-count" aria-label={lang === 'es' ? '9 proyectos' : '9 projects'}>09</span></h2><p>{c.projectLead}</p>
+          <motion.div className="section-draw" aria-hidden="true" initial={moving ? {scaleX: 0} : false} animate={!moving ? {scaleX: 1} : undefined}
+            whileInView={{scaleX: 1}} viewport={{once: true}} transition={{duration: moving ? 1 : 0}}/>
+        </motion.div>
+        <div className="project-grid">{projects.map((p, index) => <ProjectCard key={p.id} project={p} index={index} lang={lang} c={c} moving={moving} onOpen={(project, element) => {trigger.current = element; setSelected(project);}}/>)}</div>
       </section>
       <div className="personal-footer">
         <section id="about" aria-labelledby="about-title"><h2 id="about-title">{c.about}</h2><p>{c.aboutBody}</p><p className="role-context">{c.role}</p><p className="interests">{c.interests}</p></section>

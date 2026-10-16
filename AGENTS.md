@@ -76,3 +76,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - User authorized deploying the gallery demo through GitHub Actions to view it in the browser.
 - Publish the standalone gallery under /demo/ alongside the current portfolio. Keep the current main page until the user approves replacing it.
 - Embedded demos retain their current URL path when changing language, including after refresh.
+
+## Motion correction approved — October 16, 2026
+- User rejected the gallery as too static and pointed out the missing gradient. React alone does not satisfy the agreed design.
+- Add a visible flowing violet/blue/teal gradient, continuous autonomous geometric animation on desktop and mobile, pointer-responsive project depth, staggered scroll reveals and a spatially connected detail opening/closing.
+- Preserve the nine equal projects and existing content/layout. Interactive tool demos are a future improvement, not this pass.
+- Pause and system reduced motion stop continuous animation and pointer/scroll motion. Canvas rendering stops when hidden/offscreen. Verify actual pixels/time changes, not only the presence of animation code.
+- Deploy the updated candidate under /demo/ through the existing Pages workflow after checks pass.

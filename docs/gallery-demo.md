@@ -17,3 +17,7 @@ Normal development remains `npm ci`, `npm run dev`. Build with `npm run build`; 
 
 ## Remaining review
 See `design-qa.md`. Automated browser tests do not replace visual comparison with the selected mockup. Production integration and the profile README follow user review.
+
+
+## Motion revision
+Continuous background and geometric canvas animation work on desktop and mobile. The header pause button stops them; the operating system's reduced-motion preference takes priority. Cards respond to mouse movement, and details expand from the selected card. These are visual interactions; source snippets remain unexecuted examples.
