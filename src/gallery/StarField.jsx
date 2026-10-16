@@ -11,14 +11,14 @@ function createStars(count) {
     const depth = .25 + random() * .75;
     return {
       x: random(), y: random(), depth,
-      radius: .4 + depth * .65 + (index % 19 === 0 ? .35 : 0),
-      brightness: .24 + depth * .37,
+      radius: .55 + depth * .75 + (index % 11 === 0 ? .35 : 0),
+      brightness: .48 + depth * .44,
       phase: random() * Math.PI * 2,
       frequency: .00035 + random() * .0005,
-      speedX: depth * (1.6 + random() * .8),
-      speedY: -depth * (.3 + random() * .5),
+      speedX: 4 + depth * 8 + random() * 2,
+      speedY: -(1 + depth * 2 + random() * .5),
       color: colors[Math.floor(random() * colors.length)],
-      glow: index % 19 === 0
+      glow: index % 11 === 0
     };
   });
 }
@@ -37,7 +37,7 @@ function glowSprite() {
 
 export function StarField({moving}) {
   const canvas = useRef(null);
-  const scene = useRef({time: 0, x: 0, y: 0, targetX: 0, targetY: 0, scroll: 0, targetScroll: 0});
+  const scene = useRef({time: 0});
   useEffect(() => {
     const element = canvas.current, context = element.getContext('2d');
     if (!context) return;
@@ -51,9 +51,9 @@ export function StarField({moving}) {
       context.clearRect(0, 0, width, height);
       const seconds = state.time / 1000;
       for (const star of stars) {
-        const x = wrap(star.x * (width + margin*2) + seconds * star.speedX + state.x * star.depth * 22, width + margin*2) - margin;
-        const y = wrap(star.y * (height + margin*2) + seconds * star.speedY + state.y * star.depth * 16 - state.scroll * star.depth * .025, height + margin*2) - margin;
-        context.globalAlpha = star.brightness * (.78 + .22 * Math.sin(state.time * star.frequency + star.phase));
+        const x = wrap(star.x * (width + margin*2) + seconds * star.speedX, width + margin*2) - margin;
+        const y = wrap(star.y * (height + margin*2) + seconds * star.speedY, height + margin*2) - margin;
+        context.globalAlpha = star.brightness * (.86 + .14 * Math.sin(state.time * star.frequency + star.phase));
         if (star.glow) {
           const radius = star.radius * 5;
           context.drawImage(sprite, x-radius, y-radius, radius*2, radius*2);
@@ -69,10 +69,6 @@ export function StarField({moving}) {
       if (moving && !document.hidden) {
         const delta = last ? Math.min(now-last, 64) : 0;
         last = now; state.time += delta;
-        const follow = 1 - Math.exp(-delta / 180);
-        state.x += (state.targetX-state.x) * follow;
-        state.y += (state.targetY-state.y) * follow;
-        state.scroll += (state.targetScroll-state.scroll) * follow;
         render();
         frame = requestAnimationFrame(tick);
       } else {last = 0; render();}
@@ -87,33 +83,16 @@ export function StarField({moving}) {
       width = Math.max(1,rect.width); height = Math.max(1,rect.height);
       ratio = Math.min(devicePixelRatio || 1, 2);
       element.width = Math.round(width * ratio); element.height = Math.round(height * ratio);
-      stars = createStars(Math.max(55, Math.min(240, Math.round(width*height/6500))));
+      stars = createStars(Math.max(70, Math.min(280, Math.round(width*height/5200))));
       render();
     }
-    function pointer(event) {
-      if (!moving || event.pointerType !== 'mouse') return;
-      state.targetX = event.clientX / width - .5;
-      state.targetY = event.clientY / height - .5;
-    }
-    function leave(event) {
-      if (!moving || event.relatedTarget) return;
-      state.targetX = state.targetY = 0;
-    }
-    function scroll() {if (moving) state.targetScroll = window.scrollY;}
     resize();
-    state.targetScroll = window.scrollY;
     const observer = new ResizeObserver(resize);
     observer.observe(element);
-    window.addEventListener('pointermove', pointer, {passive: true});
-    window.addEventListener('pointerout', leave, {passive: true});
-    window.addEventListener('scroll', scroll, {passive: true});
     document.addEventListener('visibilitychange', sync);
     sync();
     return () => {
       alive = false; cancelAnimationFrame(frame); observer.disconnect();
-      window.removeEventListener('pointermove', pointer);
-      window.removeEventListener('pointerout', leave);
-      window.removeEventListener('scroll', scroll);
       document.removeEventListener('visibilitychange', sync);
     };
   }, [moving]);

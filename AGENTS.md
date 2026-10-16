@@ -89,3 +89,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Add stars above the retained flowing gradient while preserving the cube, gradient greeting, card depth, entrances and detail transitions. Desktop adds light pointer/scroll parallax; mobile is autonomous.
 - English remains the default without a lang query. Use English when sharing the new demo link.
 - Use the same pause and system reduced-motion controls, keep text legible and suspend the star canvas in hidden tabs. No planets, tunnel or extra visual theme.
+
+## Star visibility and autonomous movement correction — October 16, 2026
+- User found the first stars too faint and cursor-following unnatural. Star positions must depend only on elapsed time, never cursor or page scroll. This supersedes the star-field parallax decision above.
+- Increase point brightness/size moderately, gently increase density and make autonomous drift clearly perceptible without interaction. Keep soft twinkle and varied depth/speeds.
+- Render stars above the gradient's darkening veil. Keep all other approved motion and English default unchanged; pointer response of project cards and the hero cube is retained.

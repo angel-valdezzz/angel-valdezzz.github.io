@@ -12,8 +12,8 @@ export function AmbientBackground({moving}) {
       <div className="ambient-wash ambient-teal"/>
       <motion.div className="ambient-wash ambient-blue" style={{opacity: moving ? blue : .3}}/>
     </motion.div>
-    <StarField moving={moving}/>
     <div className="ambient-veil"/>
+    <StarField moving={moving}/>
   </div>;
 }
 

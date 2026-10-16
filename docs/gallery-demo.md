@@ -24,4 +24,4 @@ Continuous background and geometric canvas animation work on desktop and mobile.
 
 
 ## Programmed stars
-A transparent Canvas layer draws individual stars over the gradient. Each point has its own size, depth, velocity and slow brightness variation. The positions are reproducible and the sky is not an image. Desktop pointer/scroll adds depth; mobile drifts automatically. Existing motion controls also stop the star field, and hidden tabs stop rendering. English remains the initial language at /demo/.
+A transparent Canvas layer draws individual stars over the gradient. Each point has its own size, depth, velocity and slow brightness variation. The positions are reproducible and the sky is not an image. Stars drift automatically on desktop and mobile; their positions do not respond to cursor movement or page scroll. Depth comes from their different sizes and speeds. Existing motion controls also stop the star field, and hidden tabs stop rendering. English remains the initial language at /demo/.
