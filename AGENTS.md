@@ -94,3 +94,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - User found the first stars too faint and cursor-following unnatural. Star positions must depend only on elapsed time, never cursor or page scroll. This supersedes the star-field parallax decision above.
 - Increase point brightness/size moderately, gently increase density and make autonomous drift clearly perceptible without interaction. Keep soft twinkle and varied depth/speeds.
 - Render stars above the gradient's darkening veil. Keep all other approved motion and English default unchanged; pointer response of project cards and the hero cube is retained.
+
+## Navigation and galactic gradient approved — October 16, 2026
+- User approved a grouped translucent nav, brief header entrance, hover feedback and a sliding illuminated active-section indicator.
+- Active Projects/About/Contact must follow manual scroll in both directions, preserve explicitly clicked targets, support keyboard/history/language changes and remain clear with motion paused/reduced.
+- About and Contact receive distinct compact rows and stronger section headings, resolving the ambiguous shared footer position. Keep all nine equal projects and current personal content.
+- Broaden the moving purple/blue/cyan gradient into the visible page, add restrained rose light and reduce the dark veil. Preserve autonomous stars (no cursor/scroll influence on their positions), cube and project interactions.
+- English remains default. Publish only the reviewed demo route /demo/ through the existing Pages workflow.

@@ -10,6 +10,7 @@ export function AmbientBackground({moving}) {
     <motion.div className="ambient-scroll" style={{y: moving ? drift : 0}}>
       <div className="ambient-wash ambient-violet"/>
       <div className="ambient-wash ambient-teal"/>
+      <div className="ambient-wash ambient-rose"/>
       <motion.div className="ambient-wash ambient-blue" style={{opacity: moving ? blue : .3}}/>
     </motion.div>
     <div className="ambient-veil"/>
