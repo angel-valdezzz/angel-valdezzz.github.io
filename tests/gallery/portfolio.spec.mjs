@@ -1,5 +1,7 @@
 import {test, expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
 import {projects} from '../../src/gallery/projects.js';
 
 async function settle(page) {
@@ -81,6 +83,10 @@ test('motion pause persists; system reduced motion leaves every project visible'
     await expect(card).toHaveCSS('opacity', '1');
     await expect(card).toHaveCSS('transform', 'none');
   }
+  await page.emulateMedia({reducedMotion: 'no-preference'});
+  await expect(page.getByRole('button', {name: 'Enable motion', exact: true})).toBeEnabled();
+  await page.getByRole('button', {name: 'Enable motion', exact: true}).click();
+  await expect(page.locator('html')).toHaveAttribute('data-motion', 'on');
 });
 test('WCAG A/AA automated audit on gallery and open project', async ({page}) => {
   await page.emulateMedia({reducedMotion: 'reduce'});
@@ -130,4 +136,18 @@ test('downloadable demo embeds assets and works without application asset reques
   await page.keyboard.press('Escape');
   await expect(page.getByRole('link',{name:'Descargar CV',exact:true})).toHaveAttribute('href',/^data:application\/pdf;base64,/);
   expect(unexpected).toEqual([]);
+});
+
+test('standalone file opens offline, switches language and downloads the CV', async ({page, context}) => {
+  await context.setOffline(true);
+  await page.goto(pathToFileURL(path.resolve('dist/client/angel-gallery-demo.html')).href);
+  await expect(page.getByRole('heading',{level:1})).toHaveText("Hi, I'm Angel.");
+  await page.getByRole('button',{name:'Español',exact:true}).click();
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Hola, soy Angel.');
+  await page.getByRole('button',{name:'Explorar Request Reporter',exact:true}).click();
+  await expect.poll(()=>page.getByRole('dialog').locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
+  await page.keyboard.press('Escape');
+  const [download]=await Promise.all([page.waitForEvent('download'),page.getByRole('link',{name:'Descargar CV',exact:true}).click()]);
+  expect(download.suggestedFilename()).toBe('angel-es.pdf');
+  expect(await download.failure()).toBeNull();
 });

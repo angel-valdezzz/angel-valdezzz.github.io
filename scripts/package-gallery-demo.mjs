@@ -11,7 +11,7 @@ function localAsset(url) {
 }
 let html = fs.readFileSync(path.join(root,'index.html'),'utf8');
 const assetMap = {};
-for (const url of ['/assets/projects/evidence-reporter.webp','/assets/projects/marka.webp','/assets/projects/request-reporter.webp','/cv/angel-en.pdf','/cv/angel-es.pdf']) {
+for (const url of ['/assets/projects/evidence-reporter.webp','/assets/projects/marka.webp','/assets/projects/request-reporter.webp','/assets/projects/request-logger.svg','/cv/angel-en.pdf','/cv/angel-es.pdf']) {
   const file=localAsset(url); assetMap[url]=toData(file,mime(file));
 }
 html = html.replace(/<link\b[^>]*rel="stylesheet"[^>]*>/g, tag => {

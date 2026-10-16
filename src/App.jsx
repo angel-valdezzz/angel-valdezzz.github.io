@@ -1,5 +1,5 @@
-import React, {useEffect, useLayoutEffect, useRef, useState} from 'react';
-import {motion, MotionConfig, useMotionValue, useSpring, useReducedMotion} from 'motion/react';
+import React, {useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore} from 'react';
+import {motion, MotionConfig, useMotionValue, useSpring} from 'motion/react';
 import {ArrowUpRight, ArrowUp, BracketsCurly, Browser, Code, Cube, DownloadSimple, EnvelopeSimple, FileText, GithubLogo, Pause, Play, Table, TerminalWindow, X} from '@phosphor-icons/react';
 import '@fontsource/inter/latin-400.css';
 import '@fontsource/inter/latin-500.css';
@@ -13,6 +13,13 @@ const email = 'angelgerardomolinavaldez@gmail.com';
 const assetUrl = path => window.__PORTFOLIO_ASSETS__?.[path] || path;
 const sectionIds = ['projects', 'about', 'contact'];
 const iconMap = {browser: Browser, braces: BracketsCurly, file: FileText, table: Table, terminal: TerminalWindow, code: Code};
+const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
+function subscribeReducedMotion(notify) {
+  const query = window.matchMedia(reducedMotionQuery);
+  query.addEventListener('change', notify);
+  return () => query.removeEventListener('change', notify);
+}
+function reducedMotionSnapshot() { return window.matchMedia(reducedMotionQuery).matches; }
 function readPreference(key, fallback) {
   try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; }
 }
@@ -39,7 +46,7 @@ function Preview({project: p, lang, c, full = false}) {
     {full && <figcaption>{c.imageNote}</figcaption>}
   </figure>;
   if (p.code) {
-    const excerpt = p.previewLines.map(i => p.code.split('\n')[i]).join('\n');
+    const excerpt = p.previewCode || p.previewLines.map(i => p.code.split('\n')[i]).join('\n');
     return <div className={'code-preview' + (full ? ' full-code' : '')}>
       <div className="preview-heading"><Icon size={19} aria-hidden="true"/><span>{p.previewLabel}</span></div>
       <SourceCode code={full ? p.code : excerpt} compact={!full} label={p.name[lang] + ' — ' + c.source}/>
@@ -118,7 +125,7 @@ export function App() {
   const [selected, setSelected] = useState(null);
   const [active, setActive] = useState('projects');
   const trigger = useRef(null);
-  const reduced = useReducedMotion();
+  const reduced = useSyncExternalStore(subscribeReducedMotion, reducedMotionSnapshot, () => true);
   const moving = !paused && !reduced;
   const c = copy[lang];
   useEffect(() => {
@@ -156,7 +163,7 @@ export function App() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion="user"><div className="site" id="top">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top">
     <a href="#main" className="skip-link">{c.skip}</a>
     <header className="site-header"><div className="header-inner">
       <a className="brand" href="#top" aria-label={'Angel — ' + c.back}>Angel<span>.</span></a>

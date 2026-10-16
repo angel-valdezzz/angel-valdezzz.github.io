@@ -25,11 +25,11 @@ export const projects = [
     "language": "Robot Framework",
     "previewLines": [
       0,
-      1,
-      2,
       3,
       4,
-      5
+      5,
+      6,
+      7
     ],
     "previewLabel": "tests / use_cases / pages",
     "overview": {
@@ -161,7 +161,8 @@ export const projects = [
         "kind": "reports",
         "url": "https://angel-valdezzz.github.io/robotframework-api-testing/"
       }
-    ]
+    ],
+    "previewCode": "{\n  \"name\": \"{{name}}\",\n  \"email\": \"{{email}}\",\n  \"role\": \"{{role}}\"\n}"
   },
   {
     "id": "evidence",
@@ -375,7 +376,8 @@ export const projects = [
         "kind": "source",
         "url": "https://github.com/angel-valdezzz/robotframework-paylo/blob/main/README.md"
       }
-    ]
+    ],
+    "previewCode": "payload = render_template(\n    {\"name\": \"{{customer.name}}\",\n     \"quantity\": \"{{quantity}}\"},\n    {\"customer\": {\"name\": \"Ana\"},\n     \"quantity\": 3},\n)"
   },
   {
     "id": "pytabify",
@@ -400,11 +402,11 @@ export const projects = [
     "code": "from pytabify import DataTableCreator, DataTableSaver\n\ntable = DataTableCreator.from_records([\n    {\"name\": \"Ana\", \"active\": True},\n    {\"name\": \"Luis\", \"active\": False},\n])\nassert table[0].name == table[0][\"name\"] == \"Ana\"\nassert table[0].active is True\n\ntable[0].folio = \"F-001\"\nassert table[1].folio is None\nDataTableSaver.into_json(table, \"cases.json\")",
     "language": "Python",
     "previewLines": [
-      0,
       2,
       3,
       4,
-      5
+      5,
+      7
     ],
     "previewLabel": "pytabify / CSV · JSON · XLSX",
     "overview": {
@@ -469,16 +471,7 @@ export const projects = [
       "Robot Framework",
       "Rich"
     ],
-    "code": "*** Settings ***\nLibrary    RequestsLibrary\nLibrary    RequestLogger    mode=summary\n\n*** Test Cases ***\nHealth\n    ${response}=    GET    http://localhost:8000/health    expected_status=anything\n    ${id}=    Log Response    Health    ${response}\n    ${status}    ${message}=    Run Keyword And Ignore Error\n    ...    Should Be Equal As Integers    ${response.status_code}    200\n    Log Assertion Result    ${id}    HTTP status    ${status}    ${message}\n    IF    $status == 'FAIL'\n        Fail    ${message}\n    END",
     "language": "Robot Framework",
-    "previewLines": [
-      0,
-      1,
-      2,
-      4,
-      5,
-      6
-    ],
     "previewLabel": "RequestLogger / console",
     "overview": {
       "en": "Console output that connects requests, responses and recorded assertion results without replacing Robot's own execution result.",
@@ -520,7 +513,16 @@ export const projects = [
         "kind": "example",
         "url": "https://angel-valdezzz.github.io/robotframework-request-logger/console/"
       }
-    ]
+    ],
+    "image": "/assets/projects/request-logger.svg",
+    "imageSize": [
+      994,
+      440
+    ],
+    "imageAlt": {
+      "en": "Actual Rich console export from Robot executions, with recorded HTTP exchanges and assertion results.",
+      "es": "Exportación real de la consola Rich desde ejecuciones Robot, con intercambios HTTP y resultados de assertions."
+    }
   },
   {
     "id": "reporter",
