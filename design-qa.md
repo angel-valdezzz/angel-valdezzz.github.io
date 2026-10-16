@@ -10,8 +10,8 @@ Nine equally visible projects, brief personal introduction, GitHub/CV/EN-ES in t
 - Captures for English, Spanish, a project dialog and 320px layout are produced in the gallery-browser-review artifact.
 - A standalone HTML demo embeds its assets and both CV PDFs. It can be opened after downloading and extracting the angel-gallery-demo artifact.
 - Local command execution is blocked by helper_sandbox_lock_failed.
-- No interactive browser is available in this chat to compare generated captures against the selected visual target.
-- Automated results will be recorded after the final branch run completes.
+- CI desktop and mobile screenshots were retrieved and visually inspected. No interactive browser is available in this chat; a normalized comparison against the selected source image remains unavailable.
+- Final run 38945788177 on commit fc214b1c4c9df2d37ad78f42f50d7c440e4a61af passed npm ci, production build, existing Sites worker checks and all 16 Chromium tests (desktop and mobile).
 
 final result: blocked
 
@@ -23,4 +23,12 @@ The block is manual visual comparison / live preview, not user authorization. Th
 - Desktop 1440px and mobile 390px screenshots were retrieved from CI and inspected. P2: excess vertical spacing and truncated source preview lines. Reduced hero/row spacing and shortened or reformatted preview excerpts without changing the complete source examples.
 - Replaced the Request Logger source-code thumbnail with its genuine Rich console SVG export.
 - Added an offline file:// test for the standalone demo, including language switching and CV download.
-- Strict normalized side-by-side comparison with the generated source image remains unavailable; final result remains blocked pending that comparison and the final regression run.
+- Strict normalized side-by-side comparison with the generated source image remains unavailable; final result remains blocked pending that comparison only.
+
+
+## Final candidate — October 16, 2026
+- [Successful checks](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38945788177): 16/16 browser tests passed, including live system motion changes, focus/scroll restoration, EN/ES, CV downloads, automated WCAG A/AA checks, embedded assets and offline file opening.
+- [Download demo](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38945788177/artifacts/12064782810): extract angel-gallery-demo.html and open it in a browser. Artifact retention ends October 30, 2026; the tracked packaging script can regenerate it.
+- Final desktop and mobile captures were inspected: nine equal project cards, compact introduction, genuine project output, visible header actions and a single-column mobile layout. No page overflow was detected, including at 320px.
+- Automated accessibility checks are not a complete accessibility certification. Strict visual matching remains blocked by unavailable source-image bytes; this candidate is ready for the user's design review, not a claim of completed source-image QA.
+- No production merge or deployment was performed. README work remains after portfolio review.
