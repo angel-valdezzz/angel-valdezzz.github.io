@@ -9,11 +9,12 @@ import {projects} from './gallery/projects.js';
 import {copy} from './gallery/copy.js';
 import {AmbientBackground, HeroMotif} from './gallery/Scene.jsx';
 import {SectionNavigation, useSectionNavigation} from './gallery/Navigation.jsx';
+import {Technologies} from './gallery/Technologies.jsx';
 
 const github = 'https://github.com/angel-valdezzz';
 const email = 'angelgerardomolinavaldez@gmail.com';
 const assetUrl = path => window.__PORTFOLIO_ASSETS__?.[path] || path;
-const sectionIds = ['projects', 'about', 'contact'];
+const sectionIds = ['projects', 'technologies', 'about'];
 const iconMap = {browser: Browser, braces: BracketsCurly, file: FileText, table: Table, terminal: TerminalWindow, code: Code};
 const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 function subscribeReducedMotion(notify) {
@@ -189,7 +190,7 @@ export function App() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="galaxy-nav-1">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="technologies-1">
     <AmbientBackground moving={moving}/>
     <a href="#main" className="skip-link">{c.skip}</a>
     <motion.header ref={headerRef} layoutRoot className="site-header" data-scrolled={scrolled}><div className="header-inner">
@@ -219,16 +220,17 @@ export function App() {
         </motion.div>
         <div className="project-grid">{projects.map((p, index) => <ProjectCard key={p.id} project={p} index={index} lang={lang} c={c} moving={moving} onOpen={(project, element) => {trigger.current = element; setSelected(project);}}/>)}</div>
       </section>
-      <div className="personal-footer">
-        <section id="about" className="personal-section" tabIndex={-1} data-active={active === 'about'} aria-labelledby="about-title">
-          <div className="personal-section-heading"><span className="section-number" aria-hidden="true">02</span><h2 id="about-title">{c.about}</h2></div>
+      <Technologies c={c} moving={moving} active={active === 'technologies'}/>
+      <section id="about" className="personal-footer" tabIndex={-1} data-active={active === 'about'} aria-labelledby="about-title">
+        <div className="personal-section" data-active={active === 'about'}>
+          <div className="personal-section-heading"><span className="section-number" aria-hidden="true">03</span><h2 id="about-title">{c.about}</h2></div>
           <div className="personal-section-body"><p>{c.aboutBody}</p><p className="role-context">{c.role}</p><p className="interests">{c.interests}</p></div>
-        </section>
-        <section id="contact" className="personal-section" tabIndex={-1} data-active={active === 'contact'} aria-labelledby="contact-title">
-          <div className="personal-section-heading"><span className="section-number" aria-hidden="true">03</span><h2 id="contact-title">{c.contact}</h2></div>
+        </div>
+        <section id="contact" className="personal-section" aria-labelledby="contact-title">
+          <div className="personal-section-heading"><h3 id="contact-title">{c.contact}</h3></div>
           <div className="personal-section-body"><a className="email-link" href={'mailto:' + email}><EnvelopeSimple size={23} aria-hidden="true"/><span>{email}</span></a><External c={c} href={github}><GithubLogo size={21} aria-hidden="true"/>GitHub</External></div>
         </section>
-      </div>
+      </section>
     </main>
     <footer className="site-footer container"><span>Angel Gerardo Molina Valdez</span><a href="#top">{c.back}<ArrowUp size={16} aria-hidden="true"/></a></footer>
     {selected && <ProjectDialog project={selected} lang={lang} c={c} moving={moving} returnFocus={trigger.current} onClose={() => setSelected(null)}/>}

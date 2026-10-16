@@ -2,7 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {LayoutGroup, motion} from 'motion/react';
 
 export function useSectionNavigation(ids, moving, layoutKey) {
-  const initial = ids.includes(location.hash.slice(1)) ? location.hash.slice(1) : null;
+  const hashId = location.hash.slice(1) === 'contact' ? 'about' : location.hash.slice(1);
+  const initial = ids.includes(hashId) ? hashId : null;
   const [active, setActive] = useState(initial || ids[0]);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef(null), selected = useRef(initial), queueUpdate = useRef(() => {});
@@ -28,7 +29,7 @@ export function useSectionNavigation(ids, moving, layoutKey) {
       if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key)) release();
     }
     function history() {
-      const id = location.hash.slice(1);
+      const id = location.hash.slice(1) === 'contact' ? 'about' : location.hash.slice(1);
       selected.current = ids.includes(id) ? id : null;
       queue();
     }
@@ -80,7 +81,7 @@ export function SectionNavigation({ids, labels, label, active, moving, navigate}
     {ids.map((id, i) => <a href={'#' + id} key={id} aria-current={active === id ? 'location' : undefined}
       onClick={event => navigate(event,id)}>
       {active === id && <motion.span className="nav-indicator" aria-hidden="true"
-        layoutId={moving ? 'active-section' : undefined} initial={false} style={{borderRadius: 11}}
+        layoutId={moving ? 'active-section' : undefined} initial={false} style={{borderRadius: 0}}
         transition={moving ? {type:'spring',stiffness:420,damping:34} : {duration:0}}/>}
       <span className="nav-label">{labels[i]}</span>
     </a>)}

@@ -29,3 +29,7 @@ A transparent Canvas layer draws individual stars over the gradient. Each point 
 
 ## Navigation and galactic color
 The grouped navigation shows one illuminated current section with a shared moving indicator. Manual scroll follows section positions; selected anchor links remain highlighted until manual scrolling resumes. Keyboard focus moves to the destination, browser history and ES/EN are supported, and paused/reduced motion use an immediate indicator. About and Contact are separate compact rows. The brighter purple/blue/cyan gradient includes soft rose light; autonomous stars and existing interactions are retained.
+
+
+## Technologies and quieter navigation
+The nav uses three plain text links with one fine moving underline: Projects, Technologies and About. The personal closing includes Contact, keeping About active throughout it; legacy #contact anchors still work. The new section contains only the four technologies confirmed by Angel (Python, Java, Robot Framework, GitHub Actions), plus web test automation, API testing, automation architecture and CI/CD pipelines. No package list or proficiency scores. Original SVG logos and license notices are included locally and in the standalone HTML.

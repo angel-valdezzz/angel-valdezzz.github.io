@@ -101,3 +101,10 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - About and Contact receive distinct compact rows and stronger section headings, resolving the ambiguous shared footer position. Keep all nine equal projects and current personal content.
 - Broaden the moving purple/blue/cyan gradient into the visible page, add restrained rose light and reduce the dark veil. Preserve autonomous stars (no cursor/scroll influence on their positions), cube and project interactions.
 - English remains default. Publish only the reviewed demo route /demo/ through the existing Pages workflow.
+
+## Quiet navigation and technologies approved — October 16, 2026
+- User disliked the capsule/glow navigation. Replace it with integrated text links, color feedback and only a fine sliding underline.
+- Menu is Projects / Technologies / About, translated EN/ES. Contact stays clearly visible inside the personal closing and shares About's nav state; no rapid About/Contact switching. Retain old #contact links as an About destination alias.
+- Add a compact Technologies & skills section after all nine projects. Only confirmed technologies: Python, Java, Robot Framework, GitHub Actions. Do not list individual packages such as RequestsLibrary or the user's own tools here.
+- Capabilities: web test automation, API testing, automation architecture and CI/CD pipelines. Authentic brand icon geometry, visible names, no proficiency ratings.
+- Preserve the accepted galaxy gradient, autonomous stars, cube, card/detail interactions, motion controls and English default. Embed icons and notices in the offline demo.

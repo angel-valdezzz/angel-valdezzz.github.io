@@ -1,6 +1,6 @@
 export const copy = {
   en: {
-    nav: ['Projects', 'About', 'Contact'], navLabel: 'Main navigation', language: 'Language', skip: 'Skip to content',
+    nav: ['Projects', 'Technologies', 'About'], navLabel: 'Main navigation', language: 'Language', skip: 'Skip to content',
     cv: 'Download CV', greeting: "Hi, I'm Angel.", eyebrow: 'QA AUTOMATION · DEVELOPMENT',
     lead: 'I write tools, automate tests, and keep learning by building.',
     projectTitle: 'Projects', projectLead: "Tools I've built and testing projects I've put into practice.",
@@ -10,6 +10,10 @@ export const copy = {
     imageNote: 'Actual output from published project examples, using demo data.',
     links: {repo: 'Repository', docs: 'Documentation', source: 'Source example', architecture: 'Architecture', reports: 'Published reports', example: 'Live example'},
     external: 'opens in a new tab', details: 'Project details',
+    technologiesTitle: 'Technologies & skills',
+    technologiesLead: 'My technical foundation and the work I do with it.',
+    technologyGroup: 'Technologies', capabilitiesLabel: 'What I work on',
+    capabilities: ['Web test automation','API testing','Automation architecture','CI/CD pipelines'],
     about: 'A little about me',
     aboutBody: 'I enjoy the logic behind testing, the craft of building tools, and the puzzles in between.',
     role: 'I work as a Senior Tester in QA Automation. My next career step is SDET.',
@@ -19,7 +23,7 @@ export const copy = {
     work: 'build · test · learn'
   },
   es: {
-    nav: ['Proyectos', 'Sobre mí', 'Contacto'], navLabel: 'Navegación principal', language: 'Idioma', skip: 'Ir al contenido',
+    nav: ['Proyectos', 'Tecnologías', 'Sobre mí'], navLabel: 'Navegación principal', language: 'Idioma', skip: 'Ir al contenido',
     cv: 'Descargar CV', greeting: 'Hola, soy Angel.', eyebrow: 'AUTOMATIZACIÓN DE PRUEBAS · DESARROLLO',
     lead: 'Desarrollo herramientas, automatizo pruebas y sigo aprendiendo mientras construyo.',
     projectTitle: 'Proyectos', projectLead: 'Herramientas que he creado y proyectos donde pongo en práctica lo que aprendo.',
@@ -29,6 +33,10 @@ export const copy = {
     imageNote: 'Salida real de ejemplos publicados del proyecto, con datos de demostración.',
     links: {repo: 'Repositorio', docs: 'Documentación', source: 'Código del ejemplo', architecture: 'Arquitectura', reports: 'Reportes publicados', example: 'Ejemplo en vivo'},
     external: 'abre en una pestaña nueva', details: 'Detalle del proyecto',
+    technologiesTitle: 'Tecnologías y habilidades',
+    technologiesLead: 'Mi base técnica y lo que construyo con ella.',
+    technologyGroup: 'Tecnologías', capabilitiesLabel: 'En qué trabajo',
+    capabilities: ['Automatización de pruebas web','Pruebas de APIs','Arquitectura de automatización','Pipelines de CI/CD'],
     about: 'Un poco sobre mí',
     aboutBody: 'Disfruto la lógica detrás de las pruebas, el proceso de crear herramientas y los retos que aparecen entre ambos.',
     role: 'Trabajo como Tester Sr en QA Automation. Mi siguiente paso profesional es SDET.',
