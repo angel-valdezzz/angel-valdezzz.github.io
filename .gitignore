@@ -4,3 +4,7 @@ qa-mobile.html
 *.log
 .env*
 qa/
+
+test-results/
+gallery-test-report/
+playwright/.cache/

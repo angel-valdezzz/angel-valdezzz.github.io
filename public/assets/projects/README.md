@@ -7,3 +7,7 @@ These WebP files depict actual output from the published project examples, using
 - `marka.webp`: Python Annotator output fixture from https://angel-valdezzz.github.io/robotframework-marka/assets/demo/annotated-profile-en.png
 
 Reporter previews are browser screenshots. Marka is the library-generated image already published in its documentation. Converted to WebP and resized for the portfolio; no synthetic output or performance claims were added.
+
+## Gallery addition — October 16, 2026
+
+- `request-logger.svg`: unchanged Rich SVG export copied from https://github.com/angel-valdezzz/robotframework-request-logger/blob/main/docs/assets/console-summary.svg. It represents real Robot executions against a local HTTP API with fictitious data, including intentional assertion failures. This is a console export, not a simulated terminal or a screenshot of a terminal window.

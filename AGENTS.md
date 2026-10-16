@@ -59,3 +59,52 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Warm gold hover and keyboard-focus feedback on buttons, links, previews, and disclosures. Preserve layout, palette, authentic outputs, and gold experience titles.
 - Button border light loops slowly only while hovered or keyboard-focused, and fades when interaction ends; the button itself does not rotate. Gold primary-button gradients gently move during interaction.
 - Scroll entrance effects remain one-time. Every motion still honors pause and system reduced motion.
+
+## Approved gallery demo — October 15, 2026
+- Supersedes prior visual directions for this demo branch. The main production site is not being published yet.
+- Selected visual: the first displayed three-column, nine-project gallery, refined with charcoal #101218, warm white #F2F0EB and violet #B59AFF.
+- All seven tools and both Robot Framework web/API practice projects have equal prominence. No featured Evidence Reporter, hidden secondary collection, sales language, location or CV-like timeline.
+- Preserve the brief greeting "Hi, I'm Angel." / "Hola, soy Angel.", personal tone and compact About/contact footer.
+- Header includes direct GitHub icon/link, real language-specific CV download, EN/ES and motion control.
+- React + Vite + Motion for React. Purposeful entrances, hover response and accessible project details. Pause and system reduced motion must leave content available.
+- Use actual existing output screenshots and source excerpts from the repositories. Never present generated code or simulated outcomes as real test executions.
+- Senior Tester / Tester Sr is the actual role. SDET is the next career step.
+- README work follows selection and integration of the portfolio.
+- Local shell is currently blocked by helper_sandbox_lock_failed. Use GitHub Actions checks on this isolated branch, with screenshots and a self-contained demo artifact; do not claim manual visual QA or live preview until actually available.
+
+## Demo publication — October 16, 2026
+- User authorized deploying the gallery demo through GitHub Actions to view it in the browser.
+- Publish the standalone gallery under /demo/ alongside the current portfolio. Keep the current main page until the user approves replacing it.
+- Embedded demos retain their current URL path when changing language, including after refresh.
+
+## Motion correction approved — October 16, 2026
+- User rejected the gallery as too static and pointed out the missing gradient. React alone does not satisfy the agreed design.
+- Add a visible flowing violet/blue/teal gradient, continuous autonomous geometric animation on desktop and mobile, pointer-responsive project depth, staggered scroll reveals and a spatially connected detail opening/closing.
+- Preserve the nine equal projects and existing content/layout. Interactive tool demos are a future improvement, not this pass.
+- Pause and system reduced motion stop continuous animation and pointer/scroll motion. Canvas rendering stops when hidden/offscreen. Verify actual pixels/time changes, not only the presence of animation code.
+- Deploy the updated candidate under /demo/ through the existing Pages workflow after checks pass.
+
+## Programmed star ceiling approved — October 16, 2026
+- User approved a Rolls-Royce-style star ceiling: small luminous points drawn with code, slow drift, gentle twinkle and depth. A translated image is not acceptable.
+- Add stars above the retained flowing gradient while preserving the cube, gradient greeting, card depth, entrances and detail transitions. Desktop adds light pointer/scroll parallax; mobile is autonomous.
+- English remains the default without a lang query. Use English when sharing the new demo link.
+- Use the same pause and system reduced-motion controls, keep text legible and suspend the star canvas in hidden tabs. No planets, tunnel or extra visual theme.
+
+## Star visibility and autonomous movement correction — October 16, 2026
+- User found the first stars too faint and cursor-following unnatural. Star positions must depend only on elapsed time, never cursor or page scroll. This supersedes the star-field parallax decision above.
+- Increase point brightness/size moderately, gently increase density and make autonomous drift clearly perceptible without interaction. Keep soft twinkle and varied depth/speeds.
+- Render stars above the gradient's darkening veil. Keep all other approved motion and English default unchanged; pointer response of project cards and the hero cube is retained.
+
+## Navigation and galactic gradient approved — October 16, 2026
+- User approved a grouped translucent nav, brief header entrance, hover feedback and a sliding illuminated active-section indicator.
+- Active Projects/About/Contact must follow manual scroll in both directions, preserve explicitly clicked targets, support keyboard/history/language changes and remain clear with motion paused/reduced.
+- About and Contact receive distinct compact rows and stronger section headings, resolving the ambiguous shared footer position. Keep all nine equal projects and current personal content.
+- Broaden the moving purple/blue/cyan gradient into the visible page, add restrained rose light and reduce the dark veil. Preserve autonomous stars (no cursor/scroll influence on their positions), cube and project interactions.
+- English remains default. Publish only the reviewed demo route /demo/ through the existing Pages workflow.
+
+## Quiet navigation and technologies approved — October 16, 2026
+- User disliked the capsule/glow navigation. Replace it with integrated text links, color feedback and only a fine sliding underline.
+- Menu is Projects / Technologies / About, translated EN/ES. Contact stays clearly visible inside the personal closing and shares About's nav state; no rapid About/Contact switching. Retain old #contact links as an About destination alias.
+- Add a compact Technologies & skills section after all nine projects. Only confirmed technologies: Python, Java, Robot Framework, GitHub Actions. Do not list individual packages such as RequestsLibrary or the user's own tools here.
+- Capabilities: web test automation, API testing, automation architecture and CI/CD pipelines. Authentic brand icon geometry, visible names, no proficiency ratings.
+- Preserve the accepted galaxy gradient, autonomous stars, cube, card/detail interactions, motion controls and English default. Embed icons and notices in the offline demo.
