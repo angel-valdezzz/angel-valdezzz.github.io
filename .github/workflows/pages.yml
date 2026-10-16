@@ -22,6 +22,27 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:sites
+      - name: Check out reviewed gallery demo
+        uses: actions/checkout@v4
+        with:
+          ref: 881825a260f86bdb08172b19edee2d09093aa813
+          path: gallery-preview-source
+      - name: Install demo dependencies
+        working-directory: gallery-preview-source
+        run: npm ci
+      - name: Build demo
+        working-directory: gallery-preview-source
+        run: npm run build
+      - name: Package standalone demo
+        working-directory: gallery-preview-source
+        run: node scripts/package-gallery-demo.mjs
+      - name: Add demo beside the current portfolio
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          fs.mkdirSync('dist/client/demo', {recursive: true});
+          fs.copyFileSync('gallery-preview-source/dist/client/angel-gallery-demo.html', 'dist/client/demo/index.html');
+          NODE
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -36,3 +57,22 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published demo
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          node --input-type=module <<'NODE'
+          const url = new URL('demo/', process.env.PAGE_URL);
+          let failure;
+          for (let attempt = 0; attempt < 6; attempt++) {
+            const response = await fetch(url, {cache: 'no-store'});
+            const html = await response.text();
+            if (response.ok && html.includes('window.__PORTFOLIO_ASSETS__')) {
+              console.log('Verified demo: ' + url.href);
+              process.exit(0);
+            }
+            failure = 'Demo returned HTTP ' + response.status + ' or unexpected content';
+            await new Promise(resolve => setTimeout(resolve, 5000));
+          }
+          throw new Error(failure);
+          NODE
