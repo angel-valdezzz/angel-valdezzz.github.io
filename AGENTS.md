@@ -71,3 +71,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Senior Tester / Tester Sr is the actual role. SDET is the next career step.
 - README work follows selection and integration of the portfolio.
 - Local shell is currently blocked by helper_sandbox_lock_failed. Use GitHub Actions checks on this isolated branch, with screenshots and a self-contained demo artifact; do not claim manual visual QA or live preview until actually available.
+
+## Demo publication — October 16, 2026
+- User authorized deploying the gallery demo through GitHub Actions to view it in the browser.
+- Publish the standalone gallery under /demo/ alongside the current portfolio. Keep the current main page until the user approves replacing it.
+- Embedded demos retain their current URL path when changing language, including after refresh.

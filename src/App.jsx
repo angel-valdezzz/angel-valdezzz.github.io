@@ -152,7 +152,7 @@ export function App() {
     const url = new URL(location.href);
     url.pathname = value === 'es' ? '/es/' : '/en/';
     url.searchParams.delete('lang');
-    if (location.protocol === 'file:') {
+    if (location.protocol === 'file:' || window.__PORTFOLIO_ASSETS__) {
       url.pathname = location.pathname;
       url.searchParams.set('lang', value);
     }

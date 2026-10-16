@@ -130,6 +130,9 @@ test('downloadable demo embeds assets and works without application asset reques
   await expect(page.getByRole('heading',{level:1})).toHaveText("Hi, I'm Angel.");
   await page.getByRole('button',{name:'Español',exact:true}).click();
   await expect(page.getByRole('heading',{level:1})).toHaveText('Hola, soy Angel.');
+  await expect(page).toHaveURL(/\/angel-gallery-demo\.html\?lang=es$/);
+  await page.reload();
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Hola, soy Angel.');
   await page.getByRole('button',{name:'Explorar Evidence Reporter',exact:true}).click();
   await expect(page.getByRole('dialog').locator('img')).toHaveAttribute('src',/^data:image\/webp;base64,/);
   await expect.poll(()=>page.getByRole('dialog').locator('img').evaluate(img=>img.complete&&img.naturalWidth>0)).toBe(true);
