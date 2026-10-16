@@ -25,7 +25,7 @@ jobs:
       - name: Check out reviewed gallery demo
         uses: actions/checkout@v4
         with:
-          ref: 881825a260f86bdb08172b19edee2d09093aa813
+          ref: 9e338bfaec5cd9d3917e20fa3956c7a4c455b1e7
           path: gallery-preview-source
       - name: Install demo dependencies
         working-directory: gallery-preview-source
@@ -67,7 +67,7 @@ jobs:
           for (let attempt = 0; attempt < 6; attempt++) {
             const response = await fetch(url, {cache: 'no-store'});
             const html = await response.text();
-            if (response.ok && html.includes('window.__PORTFOLIO_ASSETS__')) {
+            if (response.ok && html.includes('window.__PORTFOLIO_ASSETS__') && html.includes('motion-2')) {
               console.log('Verified demo: ' + url.href);
               process.exit(0);
             }
