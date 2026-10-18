@@ -133,3 +133,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Use the main branch source directly in Pages; remove the secondary pinned demo checkout. Verify the deployed build revision, language routes and legacy redirect.
 - The demo is a branch/path within the publication repository, not a separate repository. Keep the repository required for the live site; do not delete it as demo cleanup. Repository visibility has not been changed.
 - Merge the approved work with history preserved. Profile README work follows production publication.
+
+## Retire merged demo branch — October 17, 2026
+- User clarified that only the demo should be deleted; preserve the official public portfolio repository.
+- The demo is the fully merged branch codex/portfolio-gallery-demo, not a separate repository. Remove that branch only after checking its exact reviewed SHA, merged PR #1, ancestry in main and the verified official site.
+- A one-time workflow is restricted to the explicit cleanup commit message and fixed branch; it refuses the default branch, changed demo heads or unmerged work. No application source or repository visibility changes.
+- Keep the small /demo/ redirect for old links; it no longer hosts a duplicate app.

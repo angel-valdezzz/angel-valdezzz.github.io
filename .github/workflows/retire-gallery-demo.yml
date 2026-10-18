@@ -1,0 +1,79 @@
+name: Retire merged portfolio demo
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/retire-gallery-demo.yml']
+permissions:
+  contents: write
+jobs:
+  retire:
+    if: github.event.head_commit.message == 'Retire merged portfolio demo branch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify integration and remove only the merged demo branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_DEMO_HEAD: a0f789fa0375af274ab0769e185243b5af5452c2
+          EXPECTED_PRODUCTION_MERGE: 2fbf666df7eb91c8a3ea4ac53f01fdbc370ce733
+        run: |
+          node --input-type=module <<'NODE'
+          const repository = 'angel-valdezzz/angel-valdezzz.github.io';
+          const branch = 'codex/portfolio-gallery-demo';
+          if (process.env.GITHUB_REPOSITORY !== repository || process.env.GITHUB_REF !== 'refs/heads/main') {
+            throw new Error('Cleanup is restricted to the official portfolio main branch');
+          }
+          const headers = {
+            Authorization: 'Bearer '+process.env.GH_TOKEN,
+            Accept: 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2026-03-10'
+          };
+          async function api(method,path,allowMissing=false) {
+            const response = await fetch('https://api.github.com/repos/'+repository+path,{method,headers});
+            if (allowMissing && response.status===404) return null;
+            if (!response.ok) throw new Error(method+' '+path+' returned HTTP '+response.status);
+            return response.status===204 ? null : response.json();
+          }
+          async function officialSite() {
+            const response = await fetch('https://angel-valdezzz.github.io/',{cache:'no-store'});
+            const html = await response.text();
+            const revision = html.match(/name="portfolio-build" content="([a-f0-9]{40})"/)?.[1];
+            if (!response.ok || !html.includes('name="portfolio-version" content="portfolio-1"') ||
+                ![process.env.EXPECTED_PRODUCTION_MERGE,process.env.GITHUB_SHA].includes(revision)) {
+              throw new Error('The approved official portfolio is not verified');
+            }
+          }
+          const metadata = await api('GET','');
+          if (metadata.default_branch !== 'main' || branch === metadata.default_branch) {
+            throw new Error('Refusing to delete the default branch');
+          }
+          const reference = await api('GET','/git/ref/heads/'+branch,true);
+          if (!reference) {
+            await officialSite();
+            console.log('Demo branch is already absent; official portfolio is available.');
+            process.exit(0);
+          }
+          if (reference.object.sha !== process.env.EXPECTED_DEMO_HEAD) {
+            throw new Error('Demo branch changed; no deletion performed');
+          }
+          const main = await api('GET','/git/ref/heads/main');
+          if (main.object.sha !== process.env.GITHUB_SHA) throw new Error('Production head changed; no deletion performed');
+          const pull = await api('GET','/pulls/1');
+          if (!pull.merged || pull.head.ref !== branch || pull.head.sha !== process.env.EXPECTED_DEMO_HEAD ||
+              pull.merge_commit_sha !== process.env.EXPECTED_PRODUCTION_MERGE) {
+            throw new Error('The expected demo integration is not confirmed');
+          }
+          const comparison = await api('GET','/compare/'+reference.object.sha+'...'+main.object.sha);
+          if (!['ahead','identical'].includes(comparison.status) ||
+              comparison.merge_base_commit.sha !== reference.object.sha) {
+            throw new Error('Demo has unmerged changes; no deletion performed');
+          }
+          await officialSite();
+          await api('DELETE','/git/refs/heads/'+branch);
+          if (await api('GET','/git/ref/heads/'+branch,true)) throw new Error('Demo branch is still present');
+          const preserved = await api('GET','/git/ref/heads/main');
+          if (preserved.object.sha !== main.object.sha) throw new Error('Unexpected production head after cleanup');
+          await officialSite();
+          console.log('Deleted merged demo branch: '+branch);
+          console.log('Preserved default branch: main at '+preserved.object.sha);
+          console.log('Verified official portfolio still available: https://angel-valdezzz.github.io/');
+          NODE
