@@ -206,7 +206,7 @@ export function App() {
     };
   }, []);
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="focus-and-links-1">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-portfolio-version="portfolio-1">
     <AmbientBackground moving={moving}/>
     <a href="#main" className="skip-link">{c.skip}</a>
     <motion.header ref={headerRef} layoutRoot className="site-header" data-scrolled={scrolled}><div className="header-inner">

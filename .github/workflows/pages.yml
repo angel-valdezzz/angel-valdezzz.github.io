@@ -36,3 +36,37 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify published portfolio
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'NODE'
+          const root = new URL(process.env.PAGE_URL);
+          let failure;
+          for (let attempt = 0; attempt < 8; attempt++) {
+            const response = await fetch(root, {cache: 'no-store'});
+            const html = await response.text();
+            if (response.ok && html.includes('name="portfolio-version" content="portfolio-1"') &&
+                html.includes('name="portfolio-build" content="' + process.env.EXPECTED_SHA + '"')) {
+              for (const lang of ['en','es']) {
+                const localized = await fetch(new URL(lang+'/',root), {cache:'no-store'});
+                const content = await localized.text();
+                if (!localized.ok || !content.includes('<html lang="'+lang+'"') ||
+                    !content.includes('name="portfolio-build" content="'+process.env.EXPECTED_SHA+'"')) {
+                  throw new Error('Published language route failed: '+lang);
+                }
+              }
+              const redirect = await fetch(new URL('demo/',root), {cache:'no-store'});
+              if (!redirect.ok || !(await redirect.text()).includes('name="portfolio-redirect" content="main"')) {
+                throw new Error('Legacy demo redirect is missing');
+              }
+              console.log('Verified portfolio: '+root.href);
+              console.log('Verified /en/, /es/ and legacy /demo/ redirect for '+process.env.EXPECTED_SHA);
+              process.exit(0);
+            }
+            failure = 'Portfolio returned HTTP ' + response.status + ' or an unexpected build revision';
+            await new Promise(resolve=>setTimeout(resolve,5000));
+          }
+          throw new Error(failure);
+          NODE

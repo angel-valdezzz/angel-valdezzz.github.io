@@ -190,3 +190,38 @@ test('project focus returns after closing, with a card ring only for keyboard na
   await expect(trigger).toBeFocused();
   await expect(card).toHaveCSS('outline-style','none');
 });
+
+test('production language routes and legacy demo links resolve to the approved portfolio', async ({page,request}) => {
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const root=await request.get('/');
+  expect(root.ok()).toBe(true);
+  const html=await root.text();
+  expect(html).toContain('name="portfolio-version" content="portfolio-1"');
+  expect(html).toMatch(/name="portfolio-build" content="(?:[a-f0-9]{40}|local)"/);
+  expect(html).not.toContain('window.__PORTFOLIO_ASSETS__');
+  await page.goto('/');
+  await expect(page.locator('[data-portfolio-version="portfolio-1"]')).toBeVisible();
+  await expect(page.getByRole('heading',{level:1})).toHaveText("Hi, I'm Angel.");
+  await page.goto('/es/');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang','es');
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Hola, soy Angel.');
+  await page.goto('/en/');
+  await page.reload();
+  await expect(page.getByRole('heading',{level:1})).toHaveText("Hi, I'm Angel.");
+  await page.goto('/demo/?v=old#technologies');
+  await expect(page).toHaveURL('http://127.0.0.1:4173/#technologies');
+  await expect(page.getByRole('heading',{level:1})).toHaveText("Hi, I'm Angel.");
+  await expect(page.locator('.main-nav a[aria-current]')).toHaveAttribute('href','#technologies');
+  await expect(page.locator('.technology-name')).toHaveCount(17);
+  await page.goto('/demo/?lang=es#contact');
+  await expect(page).toHaveURL('http://127.0.0.1:4173/es/#contact');
+  await expect(page.getByRole('heading',{level:1})).toHaveText('Hola, soy Angel.');
+  await expect(page.locator('.main-nav a[aria-current]')).toHaveAttribute('href','#about');
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('lang','es');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  const legacy=await request.get('/demo/');
+  expect(await legacy.text()).toContain('name="portfolio-redirect" content="main"');
+  expect(await legacy.text()).not.toContain('window.__PORTFOLIO_ASSETS__');
+});

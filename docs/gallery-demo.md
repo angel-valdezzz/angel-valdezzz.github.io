@@ -41,3 +41,6 @@ JavaScript/TypeScript describe current knowledge. Technologies without existing 
 
 ## Project focus refinement
 Closing a project still returns focus to Explore. The full-card outline and focus-related decoration follow the button's :focus-visible state and the last keyboard/pointer interaction, keeping a visible keyboard indicator without a persistent mouse/touch outline. Technology details link only existing related projects and contain no future-example announcements.
+
+## Approved production integration
+The selected gallery is now the production candidate for the main site. Pages builds main directly; the temporary secondary checkout/embedded demo deployment is removed. The main app uses normal local assets, English by default and reloadable /en/ and /es/ routes. Old /demo/ links redirect to the main page, preserving their section and Spanish language choice. Each built HTML language entry contains the CI revision for post-deployment verification. The standalone package remains available through the browser-check artifacts.

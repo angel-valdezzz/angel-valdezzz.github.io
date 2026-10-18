@@ -125,3 +125,11 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Supersedes future-practice announcements in technology details: omit all coming-soon/planned-example notices, including JS, TS and Playwright. Keep neutral descriptions of knowledge without suggesting unbuilt examples are completed.
 - Where no related project exists, omit the project-links block entirely: no placeholder, empty heading, future announcement or fabricated link. Keep Python and other existing related-project links.
 - Browser testing found that native :focus-visible can persist when clicking an already focused trigger after keyboard use. Track keyboard/pointer input in the document capture phase and gate card focus decoration by that intent as well as :focus-visible; retain focus restoration and keyboard accessibility.
+
+## Production integration approved — October 17, 2026
+- User approved replacing the main portfolio with the current nine-project gallery and all technology/focus refinements. This supersedes the demo-only publishing limitation above.
+- Publish directly from main to https://angel-valdezzz.github.io/ with English default and working /en/ and /es/ paths. Preserve real CVs, all projects, technology details and every approved interaction.
+- Retire the duplicate /demo/ application: old links redirect to the main page, preserving section hashes and Spanish lang query as /es/.
+- Use the main branch source directly in Pages; remove the secondary pinned demo checkout. Verify the deployed build revision, language routes and legacy redirect.
+- The demo is a branch/path within the publication repository, not a separate repository. Keep the repository required for the live site; do not delete it as demo cleanup. Repository visibility has not been changed.
+- Merge the approved work with history preserved. Profile README work follows production publication.
