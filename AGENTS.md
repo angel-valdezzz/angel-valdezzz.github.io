@@ -108,3 +108,14 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Add a compact Technologies & skills section after all nine projects. Only confirmed technologies: Python, Java, Robot Framework, GitHub Actions. Do not list individual packages such as RequestsLibrary or the user's own tools here.
 - Capabilities: web test automation, API testing, automation architecture and CI/CD pipelines. Authentic brand icon geometry, visible names, no proficiency ratings.
 - Preserve the accepted galaxy gradient, autonomous stars, cube, card/detail interactions, motion controls and English default. Embed icons and notices in the offline demo.
+
+## Interactive technology inventory approved — October 17, 2026
+- Supersedes the four-technology limit above. Approved inventory: Python, Java, JavaScript, TypeScript, Robot Framework, Selenium, Playwright, Cypress, Postman, Git, GitHub, GitHub Actions, Docker, Jira, Xray, Confluence and complementary SQL.
+- The user's abbreviation pg means Playwright, not PostgreSQL. Do not add PostgreSQL. SQL is basic knowledge from university; Angel can write statements but has not used it regularly since.
+- JS/TS Selenium/Playwright practice projects are planned. Identify this scope explicitly and add project links when those projects exist; do not present future demos as completed work.
+- Xray is used through Jira to create and execute test cases. Keep descriptions within this stated scope. Docker is basic and Java is language/OOP knowledge.
+- Add only GitHub and Xray from the additional suggestions, retaining requested Jira and Confluence. Exclude Poetry, PyPI, MkDocs and Allure from this section; no individual package inventory.
+- Each technology/tool has an icon and visible name. Clicking opens one inline detail at a time, with actual usage, a few applications and links to existing related projects when available. Support keyboard activation, Escape/close with focus restoration and live EN/ES changes. No proficiency scores.
+- Group by languages/queries, automation/testing, development/execution and management/documentation. Keep SQL's complementary/basic scope explicit in its detail.
+- Capabilities summarize web automation, API testing, automation architecture, data-driven testing, testing-tool development and CI test execution, with simple decorative icons and visible text.
+- Preserve all nine equally visible projects, existing motion, autonomous stars, gradient, quiet navigation and English default. Publish the reviewed candidate under /demo/; production integration remains pending user review.

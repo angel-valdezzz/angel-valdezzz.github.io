@@ -11,8 +11,12 @@ function localAsset(url) {
 }
 let html = fs.readFileSync(path.join(root,'index.html'),'utf8');
 const assetMap = {};
-for (const url of ['/assets/projects/evidence-reporter.webp','/assets/projects/marka.webp','/assets/projects/request-reporter.webp','/assets/projects/request-logger.svg','/cv/angel-en.pdf','/cv/angel-es.pdf','/assets/technologies/python.svg','/assets/technologies/java.svg','/assets/technologies/robot-framework.svg','/assets/technologies/github-actions.svg']) {
+for (const url of ['/assets/projects/evidence-reporter.webp','/assets/projects/marka.webp','/assets/projects/request-reporter.webp','/assets/projects/request-logger.svg','/cv/angel-en.pdf','/cv/angel-es.pdf']) {
   const file=localAsset(url); assetMap[url]=toData(file,mime(file));
+}
+for (const file of fs.readdirSync(path.join(root,'assets/technologies')).filter(file => /\.(svg|png)$/.test(file)).sort()) {
+  const url='/assets/technologies/'+file;
+  assetMap[url]=toData(localAsset(url),mime(url));
 }
 html = html.replace(/<link\b[^>]*rel="stylesheet"[^>]*>/g, tag => {
   const url=tag.match(/href="([^"]+)"/)?.[1];
@@ -29,7 +33,7 @@ html = html.replace(/<script\b[^>]*src="([^"]+)"[^>]*><\/script>/g, (_,url) => {
 });
 html=html.replace('</head>','<script>window.__PORTFOLIO_ASSETS__='+JSON.stringify(assetMap)+'</script></head>');
 html=html.replace(/<link rel="canonical"[^>]*>/g,'').replace(/<link rel="alternate"[^>]*>/g,'');
-const iconCredits = ['DEVICON-LICENSE.txt','SIMPLE-ICONS-LICENSE.txt'].map(file => fs.readFileSync(path.join(root,'assets/technologies',file),'utf8')).join('\n\n');
-html = html.replace('</head>', '<!-- Technology icons: Devicon (MIT) and Simple Icons (CC0).\n'+iconCredits.replace(/-->/g,'--&gt;')+'\n--></head>');
+const iconCredits = ['DEVICON-LICENSE.txt','SIMPLE-ICONS-LICENSE.txt','SELENIUM-LICENSE.txt','XRAY-LICENSE.txt'].map(file => fs.readFileSync(path.join(root,'assets/technologies',file),'utf8')).join('\n\n');
+html = html.replace('</head>', '<!-- Technology icons: Devicon (MIT), Simple Icons (CC0), official Selenium assets (Apache-2.0) and Xray repository asset (EPL-2.0).\n'+iconCredits.replace(/-->/g,'--&gt;')+'\n--></head>');
 fs.writeFileSync(path.join(root,'angel-gallery-demo.html'),html);
 console.log('Standalone gallery demo: '+Buffer.byteLength(html)+' bytes; assets and CVs embedded.');

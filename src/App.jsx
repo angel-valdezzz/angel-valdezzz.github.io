@@ -190,7 +190,7 @@ export function App() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="technologies-1">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="technology-details-1">
     <AmbientBackground moving={moving}/>
     <a href="#main" className="skip-link">{c.skip}</a>
     <motion.header ref={headerRef} layoutRoot className="site-header" data-scrolled={scrolled}><div className="header-inner">
@@ -220,7 +220,7 @@ export function App() {
         </motion.div>
         <div className="project-grid">{projects.map((p, index) => <ProjectCard key={p.id} project={p} index={index} lang={lang} c={c} moving={moving} onOpen={(project, element) => {trigger.current = element; setSelected(project);}}/>)}</div>
       </section>
-      <Technologies c={c} moving={moving} active={active === 'technologies'}/>
+      <Technologies c={c} lang={lang} moving={moving} active={active === 'technologies'}/>
       <section id="about" className="personal-footer" tabIndex={-1} data-active={active === 'about'} aria-labelledby="about-title">
         <div className="personal-section" data-active={active === 'about'}>
           <div className="personal-section-heading"><span className="section-number" aria-hidden="true">03</span><h2 id="about-title">{c.about}</h2></div>

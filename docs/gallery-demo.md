@@ -33,3 +33,8 @@ The grouped navigation shows one illuminated current section with a shared movin
 
 ## Technologies and quieter navigation
 The nav uses three plain text links with one fine moving underline: Projects, Technologies and About. The personal closing includes Contact, keeping About active throughout it; legacy #contact anchors still work. The new section contains only the four technologies confirmed by Angel (Python, Java, Robot Framework, GitHub Actions), plus web test automation, API testing, automation architecture and CI/CD pipelines. No package list or proficiency scores. Original SVG logos and license notices are included locally and in the standalone HTML.
+
+## Interactive inventory — October 17, 2026
+The Technologies section now contains 17 approved entries in four compact groups. Each icon/name is a real button that opens one inline detail at a time. The detail describes actual scope, applications and links to existing project repositories when relevant. Keyboard activation, Escape, close/focus return, live language changes and motion controls are supported.
+
+JavaScript/TypeScript Selenium/Playwright examples are identified as planned practice, with no invented project links. SQL is complementary/basic university knowledge without recent regular use; it is not PostgreSQL. Xray describes creating/executing test cases within Jira. Poetry, PyPI, MkDocs, Allure and individual dependency packages are excluded from this section. All images (including the official Xray PNG) and source license notices are embedded in the standalone HTML.
