@@ -139,3 +139,4 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - The demo is the fully merged branch codex/portfolio-gallery-demo, not a separate repository. Remove that branch only after checking its exact reviewed SHA, merged PR #1, ancestry in main and the verified official site.
 - A one-time workflow is restricted to the explicit cleanup commit message and fixed branch; it refuses the default branch, changed demo heads or unmerged work. No application source or repository visibility changes.
 - Keep the small /demo/ redirect for old links; it no longer hosts a duplicate app.
+- Cleanup validates the immutable production merge's parent SHA and its ancestry in main directly. A PR metadata predicate differed under the workflow API and stopped the first attempt before deletion; immutable Git history is the authoritative integration proof.

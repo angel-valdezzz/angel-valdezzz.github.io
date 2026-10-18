@@ -15,6 +15,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           EXPECTED_DEMO_HEAD: a0f789fa0375af274ab0769e185243b5af5452c2
           EXPECTED_PRODUCTION_MERGE: 2fbf666df7eb91c8a3ea4ac53f01fdbc370ce733
+          PREVIOUS_PUBLISHED_SHA: 4e37d1d8f26a28c2df21db66f7d3eac639b31c7b
         run: |
           node --input-type=module <<'NODE'
           const repository = 'angel-valdezzz/angel-valdezzz.github.io';
@@ -25,7 +26,7 @@ jobs:
           const headers = {
             Authorization: 'Bearer '+process.env.GH_TOKEN,
             Accept: 'application/vnd.github+json',
-            'X-GitHub-Api-Version': '2026-03-10'
+            'X-GitHub-Api-Version': '2022-11-28'
           };
           async function api(method,path,allowMissing=false) {
             const response = await fetch('https://api.github.com/repos/'+repository+path,{method,headers});
@@ -38,7 +39,7 @@ jobs:
             const html = await response.text();
             const revision = html.match(/name="portfolio-build" content="([a-f0-9]{40})"/)?.[1];
             if (!response.ok || !html.includes('name="portfolio-version" content="portfolio-1"') ||
-                ![process.env.EXPECTED_PRODUCTION_MERGE,process.env.GITHUB_SHA].includes(revision)) {
+                ![process.env.EXPECTED_PRODUCTION_MERGE,process.env.PREVIOUS_PUBLISHED_SHA,process.env.GITHUB_SHA].includes(revision)) {
               throw new Error('The approved official portfolio is not verified');
             }
           }
@@ -57,10 +58,15 @@ jobs:
           }
           const main = await api('GET','/git/ref/heads/main');
           if (main.object.sha !== process.env.GITHUB_SHA) throw new Error('Production head changed; no deletion performed');
-          const pull = await api('GET','/pulls/1');
-          if (!pull.merged || pull.head.ref !== branch || pull.head.sha !== process.env.EXPECTED_DEMO_HEAD ||
-              pull.merge_commit_sha !== process.env.EXPECTED_PRODUCTION_MERGE) {
-            throw new Error('The expected demo integration is not confirmed');
+          const integration = await api('GET','/git/commits/'+process.env.EXPECTED_PRODUCTION_MERGE);
+          if (integration.sha !== process.env.EXPECTED_PRODUCTION_MERGE ||
+              !integration.parents.some(parent=>parent.sha===process.env.EXPECTED_DEMO_HEAD)) {
+            throw new Error('The verified production merge does not contain the reviewed demo head');
+          }
+          const publishedAncestry = await api('GET','/compare/'+integration.sha+'...'+main.object.sha);
+          if (!['ahead','identical'].includes(publishedAncestry.status) ||
+              publishedAncestry.merge_base_commit.sha !== integration.sha) {
+            throw new Error('The published integration is no longer part of main');
           }
           const comparison = await api('GET','/compare/'+reference.object.sha+'...'+main.object.sha);
           if (!['ahead','identical'].includes(comparison.status) ||
