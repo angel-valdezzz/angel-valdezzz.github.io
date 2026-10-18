@@ -154,3 +154,39 @@ test('standalone file opens offline, switches language and downloads the CV', as
   expect(download.suggestedFilename()).toBe('angel-es.pdf');
   expect(await download.failure()).toBeNull();
 });
+
+
+test('project focus returns after closing, with a card ring only for keyboard navigation', async ({page},testInfo) => {
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  await page.evaluate(()=>document.fonts.ready);
+  const trigger=page.getByRole('button',{name:'Explore Web testing',exact:true});
+  const card=page.locator('.project-card').first();
+  const pointerClick=async locator=>testInfo.project.name==='mobile' ? locator.tap() : locator.click();
+  await pointerClick(trigger);
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await pointerClick(page.getByRole('button',{name:'Close project',exact:true}));
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(card).toHaveCSS('outline-style','none');
+  await page.screenshot({path:testInfo.outputPath('focus-pointer.jpg'),type:'jpeg',quality:80});
+
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Shift+Tab');
+  await expect(trigger).toBeFocused();
+  await expect(card).toHaveCSS('outline-style','solid');
+  await expect(card).toHaveCSS('outline-width','2px');
+  await trigger.press('Enter');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(card).toHaveCSS('outline-style','solid');
+  await page.screenshot({path:testInfo.outputPath('focus-keyboard.jpg'),type:'jpeg',quality:80});
+
+  await pointerClick(trigger);
+  await pointerClick(page.getByRole('button',{name:'Close project',exact:true}));
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await expect(trigger).toBeFocused();
+  await expect(card).toHaveCSS('outline-style','none');
+});

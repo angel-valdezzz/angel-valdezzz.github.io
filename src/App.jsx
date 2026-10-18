@@ -190,7 +190,7 @@ export function App() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
-  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="technology-details-1">
+  return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="focus-and-links-1">
     <AmbientBackground moving={moving}/>
     <a href="#main" className="skip-link">{c.skip}</a>
     <motion.header ref={headerRef} layoutRoot className="site-header" data-scrolled={scrolled}><div className="header-inner">

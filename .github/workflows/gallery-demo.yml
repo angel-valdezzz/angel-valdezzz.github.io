@@ -32,7 +32,7 @@ jobs:
           import fs from 'node:fs';
           import path from 'node:path';
           function walk(dir){return fs.existsSync(dir)?fs.readdirSync(dir,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(dir,e.name)):[path.join(dir,e.name)]):[];}
-          for(const file of walk('test-results').filter(f=>/(gallery-preview|motion-preview|motion-later|motion-detail|navigation-top|navigation-about|navigation-contact|navigation-technologies|technologies-overview|technologies-python|technologies-xray|technologies-320)\.jpg$/.test(f))){
+          for(const file of walk('test-results').filter(f=>/(gallery-preview|motion-preview|motion-later|motion-detail|navigation-top|navigation-about|navigation-contact|navigation-technologies|technologies-overview|technologies-python|technologies-xray|technologies-320|focus-pointer|focus-keyboard)\.jpg$/.test(f))){
             const name=(file.includes('mobile')?'mobile':'desktop')+'-'+path.basename(file,'.jpg');
             const data=fs.readFileSync(file).toString('base64');
             for(let i=0;i<data.length;i+=16000) console.log('GALLERY_IMAGE '+name+' '+(i/16000)+' '+data.slice(i,i+16000));

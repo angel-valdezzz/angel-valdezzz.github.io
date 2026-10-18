@@ -119,3 +119,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Group by languages/queries, automation/testing, development/execution and management/documentation. Keep SQL's complementary/basic scope explicit in its detail.
 - Capabilities summarize web automation, API testing, automation architecture, data-driven testing, testing-tool development and CI test execution, with simple decorative icons and visible text.
 - Preserve all nine equally visible projects, existing motion, autonomous stars, gradient, quiet navigation and English default. Publish the reviewed candidate under /demo/; production integration remains pending user review.
+
+## Focus and example-link refinement — October 17, 2026
+- Preserve focus restoration after a project closes. The full-card focus outline and focus-driven decorative effects should appear only when the Explore button matches :focus-visible, rather than every :focus-within state. Mouse/touch closing should leave no persistent focus ring; keyboard navigation and Escape retain a visible focus indicator.
+- Supersedes future-practice announcements in technology details: omit all coming-soon/planned-example notices, including JS, TS and Playwright. Keep neutral descriptions of knowledge without suggesting unbuilt examples are completed.
+- Where no related project exists, omit the project-links block entirely: no placeholder, empty heading, future announcement or fabricated link. Keep Python and other existing related-project links.

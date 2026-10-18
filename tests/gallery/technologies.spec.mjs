@@ -9,7 +9,7 @@ const visiblePanel = page => section(page).locator('.technology-panel:not([hidde
 async function capture(locator,testInfo,name) {
   await locator.screenshot({path:testInfo.outputPath(name+'.jpg'),type:'jpeg',quality:82});
 }
-test('all approved tools disclose their own scope; planned practice and SQL remain accurate', async ({page},testInfo) => {
+test('all approved tools disclose their scope and link only existing related projects', async ({page},testInfo) => {
   const errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await page.emulateMedia({reducedMotion:'reduce'});
@@ -41,9 +41,10 @@ test('all approved tools disclose their own scope; planned practice and SQL rema
       await expect(panel.getByRole('link',{name:/Paylo/})).toHaveAttribute('href','https://github.com/angel-valdezzz/robotframework-paylo');
       await capture(tech.locator('[data-group=languages]'),testInfo,'technologies-python');
     }
-    if(name==='JavaScript'||name==='TypeScript') {
-      await expect(panel.locator('.technology-note')).toContainText('Planned practice');
-      await expect(panel.locator('.technology-note')).toContainText('Selenium and Playwright');
+    await expect(panel.locator('.technology-note')).toHaveCount(0);
+    await expect(panel).not.toContainText(/Planned practice|Next practice|once available/);
+    if(['Java','JavaScript','TypeScript','SQL','Playwright','Cypress','Postman','Git','Docker','Jira','Xray','Confluence'].includes(name)) {
+      await expect(panel.locator('.technology-projects')).toHaveCount(0);
       await expect(panel.getByRole('link')).toHaveCount(0);
     }
     if(name==='SQL') {
@@ -86,6 +87,11 @@ test('technology details support keyboard, translated state, accessibility, narr
   await close.press('Escape');
   await expect(visiblePanel(page)).toHaveCount(0);
   await expect(xray).toBeFocused();
+  for(const name of ['JavaScript','TypeScript','Playwright']) {
+    await tech.getByRole('button',{name,exact:true}).click();
+    await expect(visiblePanel(page).locator('.technology-projects')).toHaveCount(0);
+    await expect(visiblePanel(page)).not.toContainText(/próxim|previst|disponibles/i);
+  }
   await page.goBack();
   await expect(page.locator('html')).toHaveAttribute('lang','en');
   await page.emulateMedia({reducedMotion:'no-preference'});
@@ -95,7 +101,8 @@ test('technology details support keyboard, translated state, accessibility, narr
   await expect(page.locator('html')).toHaveAttribute('data-motion','off');
   await page.setViewportSize({width:320,height:800});
   await tech.getByRole('button',{name:'TypeScript',exact:true}).click();
-  await expect(visiblePanel(page).locator('.technology-note')).toContainText('Planned practice');
+  await expect(visiblePanel(page).locator('.technology-projects')).toHaveCount(0);
+  await expect(visiblePanel(page)).not.toContainText(/Planned practice|Next practice|once available/);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await capture(tech.locator('[data-group=languages]'),testInfo,'technologies-320');
   await context.setOffline(true);

@@ -1,4 +1,4 @@
-// Content reflects Angel's stated experience. Planned practice is identified separately.
+// Content reflects Angel's stated experience. Only existing related projects are linked.
 export const technologyGroups = [
   {
     "id": "languages",
@@ -105,48 +105,40 @@ export const technologies = [
     "name": "JavaScript",
     "file": "javascript.svg",
     "description": {
-      "en": "Knowledge of the language applied to learning web test automation.",
-      "es": "Conocimientos del lenguaje que aplico al aprendizaje de la automatización web."
+      "en": "Knowledge of JavaScript for reading and working with automation code.",
+      "es": "Conocimientos de JavaScript para leer y trabajar con código de automatización."
     },
     "uses": {
       "en": [
-        "Web test automation",
-        "Selenium and Playwright practice"
+        "Language fundamentals",
+        "Automation code"
       ],
       "es": [
-        "Automatización de pruebas web",
-        "Práctica con Selenium y Playwright"
+        "Fundamentos del lenguaje",
+        "Código de automatización"
       ]
     },
-    "projects": [],
-    "note": {
-      "en": "Planned practice: web testing examples with Selenium and Playwright. These projects will be linked here once available.",
-      "es": "Prácticas previstas: ejemplos de pruebas web con Selenium y Playwright. Los proyectos se enlazarán aquí cuando estén disponibles."
-    }
+    "projects": []
   },
   {
     "id": "typescript",
     "name": "TypeScript",
     "file": "typescript.svg",
     "description": {
-      "en": "TypeScript is part of my next web test automation practice projects.",
-      "es": "TypeScript forma parte de mis próximas prácticas de automatización de pruebas web."
+      "en": "Knowledge of TypeScript and static typing.",
+      "es": "Conocimientos de TypeScript y tipado estático."
     },
     "uses": {
       "en": [
-        "Typed test code",
-        "Selenium and Playwright practice"
+        "Language fundamentals",
+        "Typed code"
       ],
       "es": [
-        "Código de pruebas tipado",
-        "Práctica con Selenium y Playwright"
+        "Fundamentos del lenguaje",
+        "Código tipado"
       ]
     },
-    "projects": [],
-    "note": {
-      "en": "Planned practice: web testing examples with Selenium and Playwright. These projects will be linked here once available.",
-      "es": "Prácticas previstas: ejemplos de pruebas web con Selenium y Playwright. Los proyectos se enlazarán aquí cuando estén disponibles."
-    }
+    "projects": []
   },
   {
     "id": "sql",
@@ -234,11 +226,7 @@ export const technologies = [
         "Pruebas web reproducibles"
       ]
     },
-    "projects": [],
-    "note": {
-      "en": "Next practice projects will include JavaScript and TypeScript examples.",
-      "es": "Las próximas prácticas incluirán ejemplos con JavaScript y TypeScript."
-    }
+    "projects": []
   },
   {
     "id": "cypress",

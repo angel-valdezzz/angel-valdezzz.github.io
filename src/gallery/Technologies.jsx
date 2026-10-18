@@ -64,7 +64,6 @@ export function Technologies({c, lang, moving, active}) {
                 <p className="technology-description">{current.description[lang]}</p>
                 <h5>{c.technologyUses}</h5>
                 <ul className="technology-uses">{current.uses[lang].map(use => <li key={use}>{use}</li>)}</ul>
-                {current.note && <p className="technology-note">{current.note[lang]}</p>}
                 {current.projects.length > 0 && <div className="technology-projects"><h5>{c.technologyProjects}</h5>
                   <ul>{current.projects.map(id => {
                     const project = projects.find(item => item.id === id);
