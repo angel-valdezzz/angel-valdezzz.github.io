@@ -39,20 +39,18 @@ export function HeroMotif({moving, c}) {
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
       context.clearRect(0, 0, width, height);
       const t = state.time;
-      state.x += (state.targetX - state.x) * .07;
-      state.y += (state.targetY - state.y) * .07;
-      const rx = .48 + Math.sin(t * .00023) * .2 + (moving ? state.y * .32 : 0);
-      const ry = .62 + t * .00038 + (moving ? state.x * .46 : 0);
-      const rz = Math.sin(t * .00016) * .13;
-      const size = Math.min(width, height) * .28;
-      function project(vertex, scale = 1, offset = 0) {
+      // Fixed camera pitch and one rotation axis keep the silhouette steady.
+      // Pointer offsets are part of the pose, so pausing never removes them.
+      const rx = .48 + state.y * .12;
+      const ry = .62 + t * .00028 + state.x * .18;
+      const size = Math.min(width, height) * .25;
+      function project(vertex, scale = 1) {
         let [x,y,z] = vertex.map(value => value * scale);
+        // Rotate the object first, then apply the camera's fixed pitch.
+        const cy = Math.cos(ry), sy = Math.sin(ry);
+        [x,z] = [x*cy+z*sy, -x*sy+z*cy];
         const cx = Math.cos(rx), sx = Math.sin(rx);
         [y,z] = [y*cx-z*sx, y*sx+z*cx];
-        const cy = Math.cos(ry + offset), sy = Math.sin(ry + offset);
-        [x,z] = [x*cy+z*sy, -x*sy+z*cy];
-        const cz = Math.cos(rz), sz = Math.sin(rz);
-        [x,y] = [x*cz-y*sz, x*sz+y*cz];
         const perspective = 4.8 / (4.8 + z);
         return {x: width/2 + x*size*perspective, y: height/2 + y*size*perspective, z};
       }
@@ -79,7 +77,7 @@ export function HeroMotif({moving, c}) {
         context.globalAlpha = 1;
       }
       drawEdges(points, 1, 1.75);
-      const inner = vertices.map(vertex => project(vertex, .42, -t * .00048));
+      const inner = vertices.map(vertex => project(vertex, .42));
       drawEdges(inner, .65, 1.1);
       points.forEach(point => {
         context.beginPath(); context.arc(point.x, point.y, 2.15, 0, Math.PI*2);
@@ -90,7 +88,11 @@ export function HeroMotif({moving, c}) {
       frame = 0;
       if (!alive) return;
       if (moving && visible && !document.hidden) {
-        if (last) state.time += Math.min(now - last, 64);
+        const elapsed = last ? Math.min(now - last, 64) : 0;
+        state.time += elapsed;
+        const blend = 1 - Math.exp(-elapsed / 220);
+        state.x += (state.targetX - state.x) * blend;
+        state.y += (state.targetY - state.y) * blend;
         last = now;
         render();
         frame = requestAnimationFrame(tick);
