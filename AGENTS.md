@@ -140,3 +140,9 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - A one-time workflow is restricted to the explicit cleanup commit message and fixed branch; it refuses the default branch, changed demo heads or unmerged work. No application source or repository visibility changes.
 - Keep the small /demo/ redirect for old links; it no longer hosts a duplicate app.
 - Cleanup validates the immutable production merge's parent SHA and its ancestry in main directly. A PR metadata predicate differed under the workflow API and stopped the first attempt before deletion; immutable Git history is the authoritative integration proof.
+
+## Hero cube stability — October 17, 2026
+- Angel reported that the cube appears crooked or rotates strangely when the page starts. Preserve the existing wireframe cube, autonomous stars, gradient, content and other interactions.
+- Keep a fixed camera pitch and rotate the object around one consistent vertical axis. The inner and outer cubes share their orientation; remove independent counter-rotation and roll.
+- Retain subtle pointer response with time-based smoothing. Pausing, resuming and reduced motion preserve the rendered pose instead of dropping pointer offsets.
+- Leave enough canvas margin for the projected vertices throughout rotation on desktop and mobile.
