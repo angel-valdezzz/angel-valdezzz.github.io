@@ -189,6 +189,22 @@ export function App() {
   function toggleMotion() {
     setPaused(value => {savePreference('angel-gallery-motion', value ? 'on' : 'off'); return !value;});
   }
+  useEffect(() => {
+    // Native focus-visible can persist after clicking an already focused trigger.
+    // Preserve focus restoration while keeping card decoration tied to input intent.
+    const root = document.documentElement;
+    function keyboard(event) {
+      if (!event.metaKey && !event.ctrlKey && !event.altKey) root.dataset.input = 'keyboard';
+    }
+    function pointer() {root.dataset.input = 'pointer';}
+    document.addEventListener('keydown', keyboard, true);
+    document.addEventListener('pointerdown', pointer, true);
+    return () => {
+      document.removeEventListener('keydown', keyboard, true);
+      document.removeEventListener('pointerdown', pointer, true);
+      delete root.dataset.input;
+    };
+  }, []);
   const motionLabel = reduced ? c.reduced : moving ? c.pause : c.resume;
   return <MotionConfig reducedMotion={moving ? "user" : "always"}><div className="site" id="top" data-demo-version="focus-and-links-1">
     <AmbientBackground moving={moving}/>

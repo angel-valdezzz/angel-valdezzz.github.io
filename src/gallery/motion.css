@@ -23,13 +23,13 @@
 .project-card{perspective:1000px;--pointer-x:50%;--pointer-y:50%}
 .project-visual{transform-style:preserve-3d;transform-origin:center;will-change:transform;transition:border-color .25s,box-shadow .3s}
 .project-glow{position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--pointer-x) var(--pointer-y),color-mix(in srgb,var(--project-color) 23%,transparent),transparent 58%);transition:opacity .35s;z-index:1}
-.project-card:hover .project-glow,.project-card:has(.explore:focus-visible) .project-glow{opacity:1}
-.project-card:hover .project-visual,.project-card:has(.explore:focus-visible) .project-visual{box-shadow:0 12px 32px -20px color-mix(in srgb,var(--project-color) 65%,transparent)}
+.project-card:hover .project-glow,html:not([data-input="pointer"]) .project-card:has(.explore:focus-visible) .project-glow{opacity:1}
+.project-card:hover .project-visual,html:not([data-input="pointer"]) .project-card:has(.explore:focus-visible) .project-visual{box-shadow:0 12px 32px -20px color-mix(in srgb,var(--project-color) 65%,transparent)}
 .project-card .output-preview img{transition:transform .6s cubic-bezier(.22,1,.36,1)}
 .project-card:hover .output-preview img{transform:scale(1.025) translateY(-2px)}
 .preview-kind{z-index:2}
 .explore svg{transition:transform .25s}
-.project-card:hover .explore svg,.project-card:has(.explore:focus-visible) .explore svg{transform:translate(3px,-3px)}
+.project-card:hover .explore svg,html:not([data-input="pointer"]) .project-card:has(.explore:focus-visible) .explore svg{transform:translate(3px,-3px)}
 .project-dialog{transform-origin:top left;border-radius:12px;box-shadow:0 25px 120px rgba(0,0,0,.55);border-color:color-mix(in srgb,var(--project-color) 40%,#343645)}
 .project-dialog::backdrop{background:rgba(5,7,12,.83);animation:detail-backdrop .35s ease-out;transition:opacity .28s}
 .project-dialog[data-closing=true]::backdrop{opacity:0}

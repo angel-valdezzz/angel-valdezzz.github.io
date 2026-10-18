@@ -62,3 +62,5 @@ Implementation adds the approved inventory, explicit experience scope and inline
 
 ## Project focus and real links only — October 17, 2026
 The full-card indicator now follows the Explore button's :focus-visible state while retaining focus restoration. Regression coverage checks mouse/real touch open-close without an outline, actual Tab/Shift+Tab navigation and keyboard Escape with an outline, then pointer use after keyboard use. Technology checks now require the complete absence of the links block for all entries without existing related projects, and absence of future-example notices in EN/ES. Current validation is pending.
+
+The first regression run (39094810020) passed the 30 existing checks but exposed a native focus-visible edge case on desktop and emulated touch: switching back to pointer after keyboard use retained the card outline. The implementation now tracks input intent in the capture phase, while preserving actual focus. The original regression assertions remain unchanged for the next run.
