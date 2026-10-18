@@ -22,27 +22,6 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run test:sites
-      - name: Check out reviewed gallery demo
-        uses: actions/checkout@v4
-        with:
-          ref: 33fb5faf676c7b59272754575c06cacdf7893306
-          path: gallery-preview-source
-      - name: Install demo dependencies
-        working-directory: gallery-preview-source
-        run: npm ci
-      - name: Build demo
-        working-directory: gallery-preview-source
-        run: npm run build
-      - name: Package standalone demo
-        working-directory: gallery-preview-source
-        run: node scripts/package-gallery-demo.mjs
-      - name: Add demo beside the current portfolio
-        run: |
-          node --input-type=module <<'NODE'
-          import fs from 'node:fs';
-          fs.mkdirSync('dist/client/demo', {recursive: true});
-          fs.copyFileSync('gallery-preview-source/dist/client/angel-gallery-demo.html', 'dist/client/demo/index.html');
-          NODE
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -57,22 +36,37 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Verify published demo
+      - name: Verify published portfolio
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          EXPECTED_SHA: ${{ github.sha }}
         run: |
           node --input-type=module <<'NODE'
-          const url = new URL('demo/', process.env.PAGE_URL);
+          const root = new URL(process.env.PAGE_URL);
           let failure;
-          for (let attempt = 0; attempt < 6; attempt++) {
-            const response = await fetch(url, {cache: 'no-store'});
+          for (let attempt = 0; attempt < 8; attempt++) {
+            const response = await fetch(root, {cache: 'no-store'});
             const html = await response.text();
-            if (response.ok && html.includes('window.__PORTFOLIO_ASSETS__') && html.includes('focus-and-links-1')) {
-              console.log('Verified demo: ' + url.href);
+            if (response.ok && html.includes('name="portfolio-version" content="portfolio-1"') &&
+                html.includes('name="portfolio-build" content="' + process.env.EXPECTED_SHA + '"')) {
+              for (const lang of ['en','es']) {
+                const localized = await fetch(new URL(lang+'/',root), {cache:'no-store'});
+                const content = await localized.text();
+                if (!localized.ok || !content.includes('<html lang="'+lang+'"') ||
+                    !content.includes('name="portfolio-build" content="'+process.env.EXPECTED_SHA+'"')) {
+                  throw new Error('Published language route failed: '+lang);
+                }
+              }
+              const redirect = await fetch(new URL('demo/',root), {cache:'no-store'});
+              if (!redirect.ok || !(await redirect.text()).includes('name="portfolio-redirect" content="main"')) {
+                throw new Error('Legacy demo redirect is missing');
+              }
+              console.log('Verified portfolio: '+root.href);
+              console.log('Verified /en/, /es/ and legacy /demo/ redirect for '+process.env.EXPECTED_SHA);
               process.exit(0);
             }
-            failure = 'Demo returned HTTP ' + response.status + ' or unexpected content';
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            failure = 'Portfolio returned HTTP ' + response.status + ' or an unexpected build revision';
+            await new Promise(resolve=>setTimeout(resolve,5000));
           }
           throw new Error(failure);
           NODE

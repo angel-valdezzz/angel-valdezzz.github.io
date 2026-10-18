@@ -1,48 +1,71 @@
-# Approved professional portfolio: design QA
+# Gallery demo verification
 
-Source visual truth: `/workspace/portfolio-scroll.html`, the interactive preview approved by Angel on October 7, 2026. Earlier cosmic and Flow Studio designs are superseded.
+Visual target: the user's selected first three-column gallery, refined with charcoal, violet and differentiated project colors on October 15, 2026.
 
-Evidence:
-- Source browser capture: `/workspace/scratch/e9e2aec29a44/portfolio-reference-qa.jpg` (1363 × 936).
-- Desktop implementation: `/workspace/scratch/e9e2aec29a44/portfolio-desktop-qa.jpg` (1348 × 926).
-- Combined comparison: `/workspace/scratch/e9e2aec29a44/portfolio-comparison-qa.jpg`.
-- Mobile implementation: `/workspace/scratch/e9e2aec29a44/portfolio-mobile-qa.jpg`, a 360px iframe with 345px content width after its scrollbar.
-- Local implementation: `http://terminal.local:4173/es/`.
-- State: Spanish, dark, initial hero. Screenshots are CSS-pixel density 1. The combined comparison removes conversation toolbar chrome and compares the top 620px product regions at equivalent widths.
+## Scope
+Nine equally visible projects, brief personal introduction, GitHub/CV/EN-ES in the header, accessible project dialog, real project content, restrained Motion animations and reduced-motion support.
 
-## Findings
+## Verification
+- GitHub Actions compiles the actual branch, runs the existing Sites worker tests, then Chromium interaction and accessibility tests on desktop and mobile.
+- Captures for English, Spanish, a project dialog and 320px layout are produced in the gallery-browser-review artifact.
+- A standalone HTML demo embeds its assets and both CV PDFs. It can be opened after downloading and extracting the angel-gallery-demo artifact.
+- Local command execution is blocked by helper_sandbox_lock_failed.
+- CI desktop and mobile screenshots were retrieved and visually inspected. No interactive browser is available in this chat; a normalized comparison against the selected source image remains unavailable.
+- Final run 38945788177 on commit fc214b1c4c9df2d37ad78f42f50d7c440e4a61af passed npm ci, production build, existing Sites worker checks and all 16 Chromium tests (desktop and mobile).
 
-No actionable P0/P1/P2 design differences remain.
+final result: blocked
 
-- **Fonts/typography:** self-hosted Inter, sans-serif heading, sober weights and the approved role line. Main body type is 16px rather than the compact preview's 14–15px, intentionally improving reading on the published site. Supporting labels are at least 12px.
-- **Spacing/layout:** A.M. header, one name heading, two-column desktop introduction, three numbered project rows, compact experience and contact. The full page has a 1120px maximum content width and native scrolling, replacing the conversation's 620px scroll frame. Additional ES/EN controls and existing demos/case details are intentional preserved capabilities.
-- **Colors/tokens:** approved navy `rgb(20,33,46)`, charcoal `rgb(22,25,32)` and warm dark endpoint `rgb(36,29,29)`. Gold is `#d8bd93`. Scroll verification observed charcoal at projects and `rgb(35,29,29)` near contact; pausing restores navy.
-- **Image/asset fidelity:** the approved preview has no representational imagery. No canvas artwork, planets or generated background images are rendered. Phosphor icons match the source's thin directional and download icon treatment. Gold gradients are explicitly approved button styling.
-- **Copy/content:** Angel Molina without accent; QA Automation Engineer · SDET in the hero; Tester Sr / Senior Tester retained in employment. Projects appear before experience. Root stays English, `/es/` Spanish. CV assets remain real existing PDFs.
+The block is manual visual comparison / live preview, not user authorization. The demo stays on an isolated branch. The production GitHub Pages site is unchanged.
 
-## Browser interaction verification
+## First automated pass and fixes
+- Run 38803951858 on commit 5f892c5: compilation and Sites worker checks passed; 12/14 browser checks passed.
+- P1: system reduced-motion changes were not reflected while the page remained open. Replaced the initial-only library hook with a reactive matchMedia subscription; the test also checks restoration when the preference changes back.
+- Desktop 1440px and mobile 390px screenshots were retrieved from CI and inspected. P2: excess vertical spacing and truncated source preview lines. Reduced hero/row spacing and shortened or reformatted preview excerpts without changing the complete source examples.
+- Replaced the Request Logger source-code thumbnail with its genuine Rich console SVG export.
+- Added an offline file:// test for the standalone demo, including language switching and CV download.
+- Strict normalized side-by-side comparison with the generated source image remains unavailable; final result remains blocked pending that comparison only.
 
-- Navigation to projects/contact and back to top.
-- ES/EN switch updates visible copy, document language, URL and CV target.
-- Evidence demo dialog opens; API tab produces fictional 200/JSON validation output; annotation tab highlights the email field and changes its action to remove annotation; close restores the page.
-- Mobile project case study expands with problem, solution and technical decisions. No horizontal overflow at desktop or mobile width.
-- Keyboard focus activates the CV border animation while the button remains stable; pause turns motion off and background returns to navy.
-- Console checked: no site warnings/errors. Browser extension metadata errors were excluded by their `chrome-extension:` source.
-- Build and four existing worker/packaging tests pass.
 
-## Comparison history
+## Final candidate — October 16, 2026
+- [Successful checks](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38945788177): 16/16 browser tests passed, including live system motion changes, focus/scroll restoration, EN/ES, CV downloads, automated WCAG A/AA checks, embedded assets and offline file opening.
+- [Download demo](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38945788177/artifacts/12064782810): extract angel-gallery-demo.html and open it in a browser. Artifact retention ends October 30, 2026; the tracked packaging script can regenerate it.
+- Final desktop and mobile captures were inspected: nine equal project cards, compact introduction, genuine project output, visible header actions and a single-column mobile layout. No page overflow was detected, including at 320px.
+- Automated accessibility checks are not a complete accessibility certification. Strict visual matching remains blocked by unavailable source-image bytes; this candidate is ready for the user's design review, not a claim of completed source-image QA.
+- No production merge or deployment was performed. README work remains after portfolio review.
 
-First full-view comparison found no actionable P0/P1/P2 mismatch. Focused visual inspection covered readable hero copy, button treatment and the mobile project row. Before final checks, language touch targets were enlarged for coarse pointers, navigation was allowed to wrap for enlarged text, and the demo dialog received an accessible name. These are accessibility refinements, not changes to the approved visual direction.
 
-## Implementation checklist
+## Motion revision — October 16, 2026
+The user found the first candidate too static and noted the missing gradient. This revision adds an animated violet/blue/teal background, an actual continuously rendered geometric canvas on desktop and mobile, gradient greeting, pointer depth and light on cards, staggered entrances and native-dialog opening/closing from the selected card's position. Motion is stopped by pause/system preference; the canvas also suspends outside the viewport or when the tab is hidden.
 
-- Preserve existing GitHub Pages workflow and CVs.
-- Remove temporary QA wrappers before the production build.
-- Publish only after the final build and tests pass.
-- Verify the deployed GitHub Pages route in the browser.
+New browser checks compare actual canvas pixels and computed gradient transforms/positions over time, then require them to stay unchanged while paused or with reduced motion. Interaction checks cover tilt, active dialog animation and restored focus. Timed viewport captures supplement the previous static/reduced-motion gallery captures. [Run 38951188409](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38951188409) on 9e338bfaec5cd9d3917e20fa3956c7a4c455b1e7 passed the production build, existing Sites checks and all 20 browser tests. Actual canvas pixels, background transform and greeting-gradient position changed over time on desktop and mobile, stayed unchanged during pause/reduced motion and resumed after enabling motion. Desktop pointer depth, active detail transition, keyboard focus restoration, language switching, CV downloads, offline demo and WCAG A/AA automated checks passed. Timed desktop captures, the mobile viewport and a fully opened detail were visually inspected. This verifies the requested motion correction; it does not claim the previously blocked normalized source-image comparison is complete.
 
-## Follow-up polish
 
-None required. Actual Android hardware and OS-level reduced-motion emulation were not available; CSS and runtime guards both honor that preference.
+## Programmed star ceiling — October 16, 2026
+The approved motion design is retained. A transparent star canvas adds slow per-star drift, gentle brightness variation and layered pointer/scroll parallax, with capped pixel ratio/density and cached glow sprites. No new dependencies or image assets. Existing live pixel comparisons now include the star canvas, including paused/reduced-motion/resumed states. [Run 38952854283](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38952854283) on ead906995892af6380bacf9252f08f32aae61b72 passed compilation, existing Sites checks and all 20 browser tests. Star-canvas pixels changed over time and after resuming, and stayed identical while paused or with system reduced motion. Existing cube/gradient motion, card depth, detail transitions, focus restoration, languages, CV downloads, offline opening and automated accessibility checks remained passing. Actual desktop and mobile viewport captures were retrieved and inspected: stars are visible over the retained gradient, with content and the mobile cube unobstructed. English is still the default. The previous limitation on a normalized comparison with the original generated image is unchanged.
 
-final result: passed
+
+## Star visibility and autonomous drift correction — October 16, 2026
+The user found stars too dim and the cursor-following effect unnatural. Removed all pointer/scroll input from the star renderer, increased autonomous horizontal drift to roughly 6–14 CSS pixels/second depending on depth, raised brightness/radius modestly, and placed the transparent star canvas above the gradient veil. The existing cube/card pointer interactions and all other motion remain intact. [Run 38953701765](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38953701765) on 48ee98db3e4d223b71b34243ba9df50620d07231 passed compilation, Sites checks and all 20 browser tests. Timed captures of desktop and mobile were inspected: star points are clearly brighter/larger while content, gradient and geometric animation remain visible. The existing real-pixel test confirms autonomous canvas changes before any pointer interaction and freezes/resumes correctly with motion controls. The star renderer no longer subscribes to pointer or scroll events. English remains the default. Earlier normalized source-image comparison limitations remain unchanged.
+
+
+## Navigation and galactic gradient — October 16, 2026
+Implements grouped nav, a sliding current-section indicator, header entrance/scroll state, clearer About/Contact rows and broader purple/blue/cyan/rose background color. New browser checks cover manual scroll in both directions, footer destinations, keyboard focus, history/language changes, indicator alignment and pause. [Final run 38956180703](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38956180703) on 12377766353e05405cc3e632540ef3607928fcef passed compilation, Sites checks and all 24 desktop/mobile browser tests. New checks validated manual scroll through Projects/About/Contact and back, clicked footer destinations, focus, keyboard activation, ES/EN/history, one current link, indicator geometry, motion pause and viewport overflow. Existing live star/cube/gradient motion, accessible dialogs, CV downloads, offline opening and automated accessibility checks remained passing. Fresh desktop hero/About/Contact captures and mobile top/Contact captures were inspected. A first passing run exposed excess capsule width in mobile screenshots; the final run includes the fitted nav and its updated capture was inspected. Gradient is clearly visible, stars are retained, footer rows are distinct, and active nav highlighting is unambiguous in captured states. The prior source-image comparison limitation remains unchanged.
+
+
+## Quiet navigation and technologies — October 16, 2026
+Replaces the capsule with text links/a fine underline, adds confirmed technology icons and capabilities, and groups Contact within the personal closing. New checks cover all three scroll destinations, no separate contact nav state, legacy contact hash, focus/history/ES-EN, underline alignment, icon decoding, translated capabilities, 320px overflow and offline SVG embedding. [Run 38959307572](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/38959307572) on 4333b290043e320a3d71c8a6d0f1e992ae3542d7 passed compilation, existing Sites checks and all 26 desktop/mobile browser tests. Checks covered Projects/Technologies/About scroll states, no separate Contact state at page end, legacy #contact alias, keyboard focus/history/EN-ES, fine underline alignment, all four SVGs decoding, translated capabilities, 320px overflow and offline icon embedding. Existing star/cube/gradient motion, motion controls, accessible project details and CV downloads remained passing. Actual desktop header/technology and mobile technology captures were retrieved and inspected in the implementation turn. The demo publication was interrupted during the ref update, then resumed on October 16 with the same tested source, without further application changes. Previous source-image comparison limitations remain unchanged.
+
+## Interactive technologies — October 17, 2026
+Implementation adds the approved inventory, explicit experience scope and inline technology details. New browser checks exercise all 17 entries, one-open-detail behavior, project links, JS/TS planned practice, basic SQL/Docker wording, Jira-integrated Xray, keyboard toggling, Escape/focus return, EN/ES state, reduced/paused motion, 320px layout, automated accessibility with a detail open and offline PNG/details. 
+
+[Run 39094220005](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/39094220005) verified 6a8041719404c6a8c29f7afbe201c9265e86966e: clean install, build, existing Sites checks, self-contained packaging and all 30 Chromium desktop/mobile browser tests passed. The standalone demo is 1,198,999 bytes. Tests cover the approved inventory, actual project repository destinations, one expanded detail, keyboard/Space/Enter/Escape, focus return, EN/ES with selected detail retained, 320px layout, paused/reduced motion, SVG/PNG decoding, offline details/CV and automated accessibility. Existing star/cube/gradient pixel motion and all nine project dialog checks remain passing. Actual desktop technology overview/Python and mobile Xray/320px TypeScript captures were retrieved and visually inspected: content is readable, logos load, selected states are clear and panels fit the available width. Mobile is Chromium device emulation, not Safari or a physical device. Prior source-image comparison limitations remain unchanged.
+
+## Project focus and real links only — October 17, 2026
+The full-card indicator now follows the Explore button's :focus-visible state while retaining focus restoration. Regression coverage checks mouse/real touch open-close without an outline, actual Tab/Shift+Tab navigation and keyboard Escape with an outline, then pointer use after keyboard use. Technology checks now require the complete absence of the links block for all entries without existing related projects, and absence of future-example notices in EN/ES. [Run 39095002966](https://github.com/angel-valdezzz/angel-valdezzz.github.io/actions/runs/39095002966) on 33fb5faf676c7b59272754575c06cacdf7893306 passed build, existing Sites checks and all 32 Chromium desktop/mobile tests.
+
+The first regression run (39094810020) passed the 30 existing checks but exposed a native focus-visible edge case on desktop and emulated touch: switching back to pointer after keyboard use retained the card outline. The implementation now tracks input intent in the capture phase, while preserving actual focus. The original regression assertions remain unchanged for the next run.
+
+Final validation: mouse/touch closing has no card outline; Tab/Shift+Tab and keyboard Escape preserve the visible focus ring; returning to pointer after keyboard also removes it without discarding focus. Technologies with no related project have neither a links block nor any future-example notices in EN/ES. Existing project links, motion, navigation, accessibility, offline and CV checks pass. Actual desktop pointer/keyboard captures and mobile 320px TypeScript capture were inspected. The standalone HTML is 1,198,576 bytes. Mobile uses Chromium emulation; previous source-mock comparison limits remain unchanged.
+
+## Main portfolio integration — October 17, 2026
+The approved app is being promoted to the main portfolio. The production workflow now builds the integrated source directly, verifies its deployed SHA and language routes, and replaces the legacy demo application with a hash/language-preserving redirect. New browser coverage checks the normal main app, EN/ES reloads, both old demo entry languages and preserved navigation destinations. Production-entry validation is recorded by the integration Actions run linked in PR #1.

@@ -59,3 +59,77 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Warm gold hover and keyboard-focus feedback on buttons, links, previews, and disclosures. Preserve layout, palette, authentic outputs, and gold experience titles.
 - Button border light loops slowly only while hovered or keyboard-focused, and fades when interaction ends; the button itself does not rotate. Gold primary-button gradients gently move during interaction.
 - Scroll entrance effects remain one-time. Every motion still honors pause and system reduced motion.
+
+## Approved gallery demo — October 15, 2026
+- Supersedes prior visual directions for this demo branch. The main production site is not being published yet.
+- Selected visual: the first displayed three-column, nine-project gallery, refined with charcoal #101218, warm white #F2F0EB and violet #B59AFF.
+- All seven tools and both Robot Framework web/API practice projects have equal prominence. No featured Evidence Reporter, hidden secondary collection, sales language, location or CV-like timeline.
+- Preserve the brief greeting "Hi, I'm Angel." / "Hola, soy Angel.", personal tone and compact About/contact footer.
+- Header includes direct GitHub icon/link, real language-specific CV download, EN/ES and motion control.
+- React + Vite + Motion for React. Purposeful entrances, hover response and accessible project details. Pause and system reduced motion must leave content available.
+- Use actual existing output screenshots and source excerpts from the repositories. Never present generated code or simulated outcomes as real test executions.
+- Senior Tester / Tester Sr is the actual role. SDET is the next career step.
+- README work follows selection and integration of the portfolio.
+- Local shell is currently blocked by helper_sandbox_lock_failed. Use GitHub Actions checks on this isolated branch, with screenshots and a self-contained demo artifact; do not claim manual visual QA or live preview until actually available.
+
+## Demo publication — October 16, 2026
+- User authorized deploying the gallery demo through GitHub Actions to view it in the browser.
+- Publish the standalone gallery under /demo/ alongside the current portfolio. Keep the current main page until the user approves replacing it.
+- Embedded demos retain their current URL path when changing language, including after refresh.
+
+## Motion correction approved — October 16, 2026
+- User rejected the gallery as too static and pointed out the missing gradient. React alone does not satisfy the agreed design.
+- Add a visible flowing violet/blue/teal gradient, continuous autonomous geometric animation on desktop and mobile, pointer-responsive project depth, staggered scroll reveals and a spatially connected detail opening/closing.
+- Preserve the nine equal projects and existing content/layout. Interactive tool demos are a future improvement, not this pass.
+- Pause and system reduced motion stop continuous animation and pointer/scroll motion. Canvas rendering stops when hidden/offscreen. Verify actual pixels/time changes, not only the presence of animation code.
+- Deploy the updated candidate under /demo/ through the existing Pages workflow after checks pass.
+
+## Programmed star ceiling approved — October 16, 2026
+- User approved a Rolls-Royce-style star ceiling: small luminous points drawn with code, slow drift, gentle twinkle and depth. A translated image is not acceptable.
+- Add stars above the retained flowing gradient while preserving the cube, gradient greeting, card depth, entrances and detail transitions. Desktop adds light pointer/scroll parallax; mobile is autonomous.
+- English remains the default without a lang query. Use English when sharing the new demo link.
+- Use the same pause and system reduced-motion controls, keep text legible and suspend the star canvas in hidden tabs. No planets, tunnel or extra visual theme.
+
+## Star visibility and autonomous movement correction — October 16, 2026
+- User found the first stars too faint and cursor-following unnatural. Star positions must depend only on elapsed time, never cursor or page scroll. This supersedes the star-field parallax decision above.
+- Increase point brightness/size moderately, gently increase density and make autonomous drift clearly perceptible without interaction. Keep soft twinkle and varied depth/speeds.
+- Render stars above the gradient's darkening veil. Keep all other approved motion and English default unchanged; pointer response of project cards and the hero cube is retained.
+
+## Navigation and galactic gradient approved — October 16, 2026
+- User approved a grouped translucent nav, brief header entrance, hover feedback and a sliding illuminated active-section indicator.
+- Active Projects/About/Contact must follow manual scroll in both directions, preserve explicitly clicked targets, support keyboard/history/language changes and remain clear with motion paused/reduced.
+- About and Contact receive distinct compact rows and stronger section headings, resolving the ambiguous shared footer position. Keep all nine equal projects and current personal content.
+- Broaden the moving purple/blue/cyan gradient into the visible page, add restrained rose light and reduce the dark veil. Preserve autonomous stars (no cursor/scroll influence on their positions), cube and project interactions.
+- English remains default. Publish only the reviewed demo route /demo/ through the existing Pages workflow.
+
+## Quiet navigation and technologies approved — October 16, 2026
+- User disliked the capsule/glow navigation. Replace it with integrated text links, color feedback and only a fine sliding underline.
+- Menu is Projects / Technologies / About, translated EN/ES. Contact stays clearly visible inside the personal closing and shares About's nav state; no rapid About/Contact switching. Retain old #contact links as an About destination alias.
+- Add a compact Technologies & skills section after all nine projects. Only confirmed technologies: Python, Java, Robot Framework, GitHub Actions. Do not list individual packages such as RequestsLibrary or the user's own tools here.
+- Capabilities: web test automation, API testing, automation architecture and CI/CD pipelines. Authentic brand icon geometry, visible names, no proficiency ratings.
+- Preserve the accepted galaxy gradient, autonomous stars, cube, card/detail interactions, motion controls and English default. Embed icons and notices in the offline demo.
+
+## Interactive technology inventory approved — October 17, 2026
+- Supersedes the four-technology limit above. Approved inventory: Python, Java, JavaScript, TypeScript, Robot Framework, Selenium, Playwright, Cypress, Postman, Git, GitHub, GitHub Actions, Docker, Jira, Xray, Confluence and complementary SQL.
+- The user's abbreviation pg means Playwright, not PostgreSQL. Do not add PostgreSQL. SQL is basic knowledge from university; Angel can write statements but has not used it regularly since.
+- JS/TS Selenium/Playwright practice projects are planned. Identify this scope explicitly and add project links when those projects exist; do not present future demos as completed work.
+- Xray is used through Jira to create and execute test cases. Keep descriptions within this stated scope. Docker is basic and Java is language/OOP knowledge.
+- Add only GitHub and Xray from the additional suggestions, retaining requested Jira and Confluence. Exclude Poetry, PyPI, MkDocs and Allure from this section; no individual package inventory.
+- Each technology/tool has an icon and visible name. Clicking opens one inline detail at a time, with actual usage, a few applications and links to existing related projects when available. Support keyboard activation, Escape/close with focus restoration and live EN/ES changes. No proficiency scores.
+- Group by languages/queries, automation/testing, development/execution and management/documentation. Keep SQL's complementary/basic scope explicit in its detail.
+- Capabilities summarize web automation, API testing, automation architecture, data-driven testing, testing-tool development and CI test execution, with simple decorative icons and visible text.
+- Preserve all nine equally visible projects, existing motion, autonomous stars, gradient, quiet navigation and English default. Publish the reviewed candidate under /demo/; production integration remains pending user review.
+
+## Focus and example-link refinement — October 17, 2026
+- Preserve focus restoration after a project closes. The full-card focus outline and focus-driven decorative effects should appear only when the Explore button matches :focus-visible, rather than every :focus-within state. Mouse/touch closing should leave no persistent focus ring; keyboard navigation and Escape retain a visible focus indicator.
+- Supersedes future-practice announcements in technology details: omit all coming-soon/planned-example notices, including JS, TS and Playwright. Keep neutral descriptions of knowledge without suggesting unbuilt examples are completed.
+- Where no related project exists, omit the project-links block entirely: no placeholder, empty heading, future announcement or fabricated link. Keep Python and other existing related-project links.
+- Browser testing found that native :focus-visible can persist when clicking an already focused trigger after keyboard use. Track keyboard/pointer input in the document capture phase and gate card focus decoration by that intent as well as :focus-visible; retain focus restoration and keyboard accessibility.
+
+## Production integration approved — October 17, 2026
+- User approved replacing the main portfolio with the current nine-project gallery and all technology/focus refinements. This supersedes the demo-only publishing limitation above.
+- Publish directly from main to https://angel-valdezzz.github.io/ with English default and working /en/ and /es/ paths. Preserve real CVs, all projects, technology details and every approved interaction.
+- Retire the duplicate /demo/ application: old links redirect to the main page, preserving section hashes and Spanish lang query as /es/.
+- Use the main branch source directly in Pages; remove the secondary pinned demo checkout. Verify the deployed build revision, language routes and legacy redirect.
+- The demo is a branch/path within the publication repository, not a separate repository. Keep the repository required for the live site; do not delete it as demo cleanup. Repository visibility has not been changed.
+- Merge the approved work with history preserved. Profile README work follows production publication.
