@@ -1,0 +1,26 @@
+name: Review current CV content
+on:
+  push:
+    branches: [codex/cv-content-review]
+permissions:
+  contents: read
+jobs:
+  read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pypdf==6.1.1
+      - name: Read current public CV text
+        run: |
+          python - <<'PY'
+          from pypdf import PdfReader
+          for language in ('en', 'es'):
+              print('CV_TEXT_BEGIN=' + language)
+              for page in PdfReader('public/cv/angel-' + language + '.pdf').pages:
+                  print(page.extract_text())
+              print('CV_TEXT_END=' + language)
+          PY
