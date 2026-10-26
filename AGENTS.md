@@ -146,3 +146,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Keep a fixed camera pitch and rotate the object around one consistent vertical axis. The inner and outer cubes share their orientation; remove independent counter-rotation and roll.
 - Retain subtle pointer response with time-based smoothing. Pausing, resuming and reduced motion preserve the rendered pose instead of dropping pointer offsets.
 - Leave enough canvas margin for the projected vertices throughout rotation on desktop and mobile.
+
+## Independent automation examples — October 26, 2026
+- User authorized independent ParaBank UI and Demo Users API examples and corresponding portfolio/profile updates. Preserve the existing nine equally visible gallery projects and all approved motion/navigation.
+- Add validated implementations as related links inside technology details; retain neutral knowledge descriptions and actual Senior Tester role. Independent examples are personal practice, not new employment experience.
+- New Cypress examples live in cypress-parabank-testing; preserve cypress-web-e2e-demo1. TestScript remains experimental. Link examples only after their repositories exist and real application scenarios pass in Actions.

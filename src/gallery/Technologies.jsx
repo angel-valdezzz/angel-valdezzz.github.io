@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import {motion} from 'motion/react';
 import {ArrowUpRight, Browser, BracketsCurly, Code, GitBranch, Plus, Table, TreeStructure, X} from '@phosphor-icons/react';
 import {technologies, technologyGroups} from './technologies.js';
-import {projects} from './projects.js';
+import {projects, automationExamples} from './projects.js';
 
 const assetUrl = path => window.__PORTFOLIO_ASSETS__?.[path] || path;
 const capabilityIcons = [Browser, BracketsCurly, TreeStructure, Table, Code, GitBranch];
@@ -66,7 +66,7 @@ export function Technologies({c, lang, moving, active}) {
                 <ul className="technology-uses">{current.uses[lang].map(use => <li key={use}>{use}</li>)}</ul>
                 {current.projects.length > 0 && <div className="technology-projects"><h5>{c.technologyProjects}</h5>
                   <ul>{current.projects.map(id => {
-                    const project = projects.find(item => item.id === id);
+                    const project = [...projects, ...automationExamples].find(item => item.id === id);
                     const href = project.links.find(link => link.kind === 'repo').url;
                     return <li key={id}><a href={href} target="_blank" rel="noopener noreferrer">{project.name[lang]}
                       <ArrowUpRight size={14} aria-hidden="true"/><span className="sr-only"> ({c.external})</span></a></li>;
