@@ -77,7 +77,9 @@ export const technologies = [
     "projects": [
       "paylo",
       "pytabify",
-      "testscript"
+      "testscript",
+      "api-rest-starter",
+      "playwright-python-example"
     ]
   },
   {
@@ -85,28 +87,35 @@ export const technologies = [
     "name": "Java",
     "file": "java.svg",
     "description": {
-      "en": "Knowledge of the language and object-oriented programming, as part of my technical foundation.",
-      "es": "Conocimientos del lenguaje y de programación orientada a objetos como parte de mi base técnica."
+      "en": "I apply Java and object-oriented programming in independent browser and API testing examples with JUnit and TestNG.",
+      "es": "Aplico Java y programación orientada a objetos en ejemplos independientes de pruebas web y API con JUnit y TestNG."
     },
     "uses": {
       "en": [
         "Language fundamentals",
-        "Object-oriented programming"
+        "Object-oriented programming",
+        "Browser testing and HTTP assertions"
       ],
       "es": [
         "Fundamentos del lenguaje",
-        "Programación orientada a objetos"
+        "Programación orientada a objetos",
+        "Pruebas web y validaciones HTTP"
       ]
     },
-    "projects": []
+    "projects": [
+      "java-selenium-junit-testing",
+      "java-selenium-testng-testing",
+      "java-playwright-junit-testing",
+      "java-restassured-junit-testing"
+    ]
   },
   {
     "id": "javascript",
     "name": "JavaScript",
     "file": "javascript.svg",
     "description": {
-      "en": "Knowledge of JavaScript for reading and working with automation code.",
-      "es": "Conocimientos de JavaScript para leer y trabajar con código de automatización."
+      "en": "I use JavaScript in independent Playwright and Selenium examples for browser and API test automation.",
+      "es": "Utilizo JavaScript en ejemplos independientes de Playwright y Selenium para automatizar pruebas web y API."
     },
     "uses": {
       "en": [
@@ -118,15 +127,18 @@ export const technologies = [
         "Código de automatización"
       ]
     },
-    "projects": []
+    "projects": [
+      "javascript-playwright-testing",
+      "javascript-selenium-mocha-testing"
+    ]
   },
   {
     "id": "typescript",
     "name": "TypeScript",
     "file": "typescript.svg",
     "description": {
-      "en": "Knowledge of TypeScript and static typing.",
-      "es": "Conocimientos de TypeScript y tipado estático."
+      "en": "I practice TypeScript through typed Playwright and Selenium examples, with browser and API scenarios.",
+      "es": "Practico TypeScript con ejemplos tipados de Playwright y Selenium, con escenarios web y API."
     },
     "uses": {
       "en": [
@@ -138,7 +150,10 @@ export const technologies = [
         "Código tipado"
       ]
     },
-    "projects": []
+    "projects": [
+      "typescript-playwright-testing",
+      "typescript-selenium-mocha-testing"
+    ]
   },
   {
     "id": "sql",
@@ -180,7 +195,8 @@ export const technologies = [
     },
     "projects": [
       "web",
-      "api"
+      "api",
+      "robotframework-browser-testing"
     ],
     "mono": true
   },
@@ -204,7 +220,11 @@ export const technologies = [
     },
     "projects": [
       "web",
-      "marka"
+      "marka",
+      "javascript-selenium-mocha-testing",
+      "typescript-selenium-mocha-testing",
+      "java-selenium-junit-testing",
+      "java-selenium-testng-testing"
     ],
     "official": true
   },
@@ -226,7 +246,12 @@ export const technologies = [
         "Pruebas web reproducibles"
       ]
     },
-    "projects": []
+    "projects": [
+      "javascript-playwright-testing",
+      "typescript-playwright-testing",
+      "playwright-python-example",
+      "java-playwright-junit-testing"
+    ]
   },
   {
     "id": "cypress",
@@ -246,7 +271,9 @@ export const technologies = [
         "Flujos de usuario"
       ]
     },
-    "projects": [],
+    "projects": [
+      "cypress-parabank-testing"
+    ],
     "paper": true
   },
   {
@@ -333,7 +360,9 @@ export const technologies = [
     },
     "projects": [
       "web",
-      "api"
+      "api",
+      "javascript-playwright-testing",
+      "java-restassured-junit-testing"
     ],
     "mono": true
   },
@@ -355,7 +384,9 @@ export const technologies = [
         "Entornos de desarrollo y pruebas"
       ]
     },
-    "projects": []
+    "projects": [
+      "javascript-playwright-testing"
+    ]
   },
   {
     "id": "jira",

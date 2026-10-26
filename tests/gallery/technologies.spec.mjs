@@ -37,16 +37,20 @@ test('all approved tools disclose their scope and link only existing related pro
     await expect(panel).toHaveAttribute('id',controlled);
     await expect(panel.locator('.technology-description')).not.toBeEmpty();
     if(name==='Python') {
-      await expect(panel.getByRole('link')).toHaveCount(3);
+      await expect(panel.getByRole('link')).toHaveCount(5);
+      await expect(panel.getByRole('link',{name:/pytest \/ Requests/})).toHaveAttribute('href','https://github.com/angel-valdezzz/api-rest-starter');
       await expect(panel.getByRole('link',{name:/Paylo/})).toHaveAttribute('href','https://github.com/angel-valdezzz/robotframework-paylo');
       await capture(tech.locator('[data-group=languages]'),testInfo,'technologies-python');
     }
     await expect(panel.locator('.technology-note')).toHaveCount(0);
     await expect(panel).not.toContainText(/Planned practice|Next practice|once available/);
-    if(['Java','JavaScript','TypeScript','SQL','Playwright','Cypress','Postman','Git','Docker','Jira','Xray','Confluence'].includes(name)) {
+    if(['SQL','Postman','Git','Jira','Xray','Confluence'].includes(name)) {
       await expect(panel.locator('.technology-projects')).toHaveCount(0);
       await expect(panel.getByRole('link')).toHaveCount(0);
     }
+    if(name==='Java') await expect(panel.getByRole('link',{name:/REST Assured/})).toHaveAttribute('href','https://github.com/angel-valdezzz/java-restassured-junit-testing');
+    if(name==='Playwright') await expect(panel.getByRole('link')).toHaveCount(4);
+    if(name==='Cypress') await expect(panel.getByRole('link',{name:/ParaBank/})).toHaveAttribute('href','https://github.com/angel-valdezzz/cypress-parabank-testing');
     if(name==='SQL') {
       await expect(panel.locator('.technology-description')).toContainText('Basic knowledge from my degree');
       await expect(panel.locator('.technology-description')).toContainText('not used it regularly');
@@ -89,7 +93,7 @@ test('technology details support keyboard, translated state, accessibility, narr
   await expect(xray).toBeFocused();
   for(const name of ['JavaScript','TypeScript','Playwright']) {
     await tech.getByRole('button',{name,exact:true}).click();
-    await expect(visiblePanel(page).locator('.technology-projects')).toHaveCount(0);
+    await expect(visiblePanel(page).locator('.technology-projects')).toHaveCount(1);
     await expect(visiblePanel(page)).not.toContainText(/próxim|previst|disponibles/i);
   }
   await page.goBack();
@@ -101,7 +105,7 @@ test('technology details support keyboard, translated state, accessibility, narr
   await expect(page.locator('html')).toHaveAttribute('data-motion','off');
   await page.setViewportSize({width:320,height:800});
   await tech.getByRole('button',{name:'TypeScript',exact:true}).click();
-  await expect(visiblePanel(page).locator('.technology-projects')).toHaveCount(0);
+  await expect(visiblePanel(page).getByRole('link')).toHaveCount(2);
   await expect(visiblePanel(page)).not.toContainText(/Planned practice|Next practice|once available/);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await capture(tech.locator('[data-group=languages]'),testInfo,'technologies-320');

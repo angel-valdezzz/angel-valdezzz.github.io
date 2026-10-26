@@ -669,3 +669,163 @@ export const projects = [
     ]
   }
 ];
+
+// Independent implementations verified against real applications in Actions.
+export const automationExamples = [
+  {
+    "id": "javascript-playwright-testing",
+    "name": {
+      "en": "JavaScript · Playwright · UI + API",
+      "es": "JavaScript · Playwright · UI + API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/javascript-playwright-testing"
+      }
+    ]
+  },
+  {
+    "id": "typescript-playwright-testing",
+    "name": {
+      "en": "TypeScript · Playwright · UI + API",
+      "es": "TypeScript · Playwright · UI + API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/typescript-playwright-testing"
+      }
+    ]
+  },
+  {
+    "id": "playwright-python-example",
+    "name": {
+      "en": "Python · Playwright · UI",
+      "es": "Python · Playwright · UI"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/playwright-python-example"
+      }
+    ]
+  },
+  {
+    "id": "api-rest-starter",
+    "name": {
+      "en": "Python · pytest / Requests · API",
+      "es": "Python · pytest / Requests · API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/api-rest-starter"
+      }
+    ]
+  },
+  {
+    "id": "javascript-selenium-mocha-testing",
+    "name": {
+      "en": "JavaScript · Selenium / Mocha",
+      "es": "JavaScript · Selenium / Mocha"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/javascript-selenium-mocha-testing"
+      }
+    ]
+  },
+  {
+    "id": "typescript-selenium-mocha-testing",
+    "name": {
+      "en": "TypeScript · Selenium / Mocha",
+      "es": "TypeScript · Selenium / Mocha"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/typescript-selenium-mocha-testing"
+      }
+    ]
+  },
+  {
+    "id": "cypress-parabank-testing",
+    "name": {
+      "en": "Cypress · ParaBank",
+      "es": "Cypress · ParaBank"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/cypress-parabank-testing"
+      }
+    ]
+  },
+  {
+    "id": "robotframework-browser-testing",
+    "name": {
+      "en": "Robot Framework · Browser",
+      "es": "Robot Framework · Browser"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/robotframework-browser-testing"
+      }
+    ]
+  },
+  {
+    "id": "java-selenium-junit-testing",
+    "name": {
+      "en": "Java · Selenium / JUnit",
+      "es": "Java · Selenium / JUnit"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/java-selenium-junit-testing"
+      }
+    ]
+  },
+  {
+    "id": "java-selenium-testng-testing",
+    "name": {
+      "en": "Java · Selenium / TestNG",
+      "es": "Java · Selenium / TestNG"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/java-selenium-testng-testing"
+      }
+    ]
+  },
+  {
+    "id": "java-playwright-junit-testing",
+    "name": {
+      "en": "Java · Playwright / JUnit",
+      "es": "Java · Playwright / JUnit"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/java-playwright-junit-testing"
+      }
+    ]
+  },
+  {
+    "id": "java-restassured-junit-testing",
+    "name": {
+      "en": "Java · REST Assured / JUnit",
+      "es": "Java · REST Assured / JUnit"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/java-restassured-junit-testing"
+      }
+    ]
+  }
+];
