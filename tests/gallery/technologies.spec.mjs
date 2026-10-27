@@ -49,7 +49,10 @@ test('all approved tools disclose their scope and link only existing related pro
       await expect(panel.getByRole('link')).toHaveCount(0);
     }
     if(name==='Java') await expect(panel.getByRole('link',{name:/REST Assured/})).toHaveAttribute('href','https://github.com/angel-valdezzz/java-restassured-junit-testing');
-    if(name==='Playwright') await expect(panel.getByRole('link')).toHaveCount(4);
+    if(name==='Playwright') {
+      await expect(panel.getByRole('link')).toHaveCount(5);
+      await expect(panel.getByRole('link',{name:/TestScript/})).toHaveAttribute('href','https://github.com/angel-valdezzz/testscript-automation-examples');
+    }
     if(name==='Cypress') await expect(panel.getByRole('link',{name:/ParaBank/})).toHaveAttribute('href','https://github.com/angel-valdezzz/cypress-parabank-testing');
     if(name==='SQL') {
       await expect(panel.locator('.technology-description')).toContainText('Basic knowledge from my degree');
@@ -105,7 +108,8 @@ test('technology details support keyboard, translated state, accessibility, narr
   await expect(page.locator('html')).toHaveAttribute('data-motion','off');
   await page.setViewportSize({width:320,height:800});
   await tech.getByRole('button',{name:'TypeScript',exact:true}).click();
-  await expect(visiblePanel(page).getByRole('link')).toHaveCount(2);
+  await expect(visiblePanel(page).getByRole('link')).toHaveCount(3);
+  await expect(visiblePanel(page).getByRole('link',{name:/WebdriverIO/})).toHaveAttribute('href','https://github.com/angel-valdezzz/typescript-webdriverio-testing');
   await expect(visiblePanel(page)).not.toContainText(/Planned practice|Next practice|once available/);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await capture(tech.locator('[data-group=languages]'),testInfo,'technologies-320');

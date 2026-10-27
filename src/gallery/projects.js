@@ -665,6 +665,10 @@ export const projects = [
       {
         "kind": "source",
         "url": "https://github.com/angel-valdezzz/testscript/blob/main/README.md"
+      },
+      {
+        "kind": "source",
+        "url": "https://github.com/angel-valdezzz/testscript-automation-examples"
       }
     ]
   }
@@ -825,6 +829,58 @@ export const automationExamples = [
       {
         "kind": "repo",
         "url": "https://github.com/angel-valdezzz/java-restassured-junit-testing"
+      }
+    ]
+  },
+  {
+    "id": "karate-api-testing",
+    "name": {
+      "en": "Karate · API",
+      "es": "Karate · API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/karate-api-testing"
+      }
+    ]
+  },
+  {
+    "id": "java-serenity-screenplay-testing",
+    "name": {
+      "en": "Java · Serenity Screenplay · UI + API",
+      "es": "Java · Serenity Screenplay · UI + API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/java-serenity-screenplay-testing"
+      }
+    ]
+  },
+  {
+    "id": "typescript-webdriverio-testing",
+    "name": {
+      "en": "TypeScript · WebdriverIO",
+      "es": "TypeScript · WebdriverIO"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/typescript-webdriverio-testing"
+      }
+    ]
+  },
+  {
+    "id": "testscript-automation-examples",
+    "name": {
+      "en": "TestScript · Experimental · UI + API",
+      "es": "TestScript · Experimental · UI + API"
+    },
+    "links": [
+      {
+        "kind": "repo",
+        "url": "https://github.com/angel-valdezzz/testscript-automation-examples"
       }
     ]
   }
