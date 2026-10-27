@@ -106,7 +106,9 @@ export const technologies = [
       "java-selenium-junit-testing",
       "java-selenium-testng-testing",
       "java-playwright-junit-testing",
-      "java-restassured-junit-testing"
+      "java-restassured-junit-testing",
+      "karate-api-testing",
+      "java-serenity-screenplay-testing"
     ]
   },
   {
@@ -152,7 +154,8 @@ export const technologies = [
     },
     "projects": [
       "typescript-playwright-testing",
-      "typescript-selenium-mocha-testing"
+      "typescript-selenium-mocha-testing",
+      "typescript-webdriverio-testing"
     ]
   },
   {
@@ -224,7 +227,8 @@ export const technologies = [
       "javascript-selenium-mocha-testing",
       "typescript-selenium-mocha-testing",
       "java-selenium-junit-testing",
-      "java-selenium-testng-testing"
+      "java-selenium-testng-testing",
+      "java-serenity-screenplay-testing"
     ],
     "official": true
   },
@@ -250,7 +254,8 @@ export const technologies = [
       "javascript-playwright-testing",
       "typescript-playwright-testing",
       "playwright-python-example",
-      "java-playwright-junit-testing"
+      "java-playwright-junit-testing",
+      "testscript-automation-examples"
     ]
   },
   {
