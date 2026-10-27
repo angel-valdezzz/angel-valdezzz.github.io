@@ -18,9 +18,16 @@ jobs:
         run: |
           python - <<'PY'
           from pypdf import PdfReader
+          from pathlib import Path
+          import base64, hashlib
           for language in ('en', 'es'):
               print('CV_TEXT_BEGIN=' + language)
               for page in PdfReader('public/cv/angel-' + language + '.pdf').pages:
                   print(page.extract_text())
               print('CV_TEXT_END=' + language)
+              data = Path('public/cv/angel-' + language + '.pdf').read_bytes()
+              print('CV_SHA256=' + language + ':' + hashlib.sha256(data).hexdigest())
+              encoded = base64.b64encode(data).decode('ascii')
+              for offset in range(0, len(encoded), 4096):
+                  print('CV_BYTES=' + language + ':' + str(offset) + ':' + encoded[offset:offset+4096])
           PY
